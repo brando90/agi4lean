@@ -1,0 +1,115 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Azerbayev et~al.(2023{\natexlab{a}})Azerbayev, Piotrowski, Schoelkopf, Ayers, Radev, and Avigad]{azerbayev2023proofnet}
+Zhangir Azerbayev, Bartosz Piotrowski, Hailey Schoelkopf, Edward~W. Ayers, Dragomir Radev, and Jeremy Avigad.
+\newblock Proofnet: Autoformalizing and formally proving undergraduate-level mathematics, 2023{\natexlab{a}}.
+
+\bibitem[Azerbayev et~al.(2023{\natexlab{b}})Azerbayev, Schoelkopf, Paster, Santos, McAleer, Jiang, Deng, Biderman, and Welleck]{azerbayev2023llemma}
+Zhangir Azerbayev, Hailey Schoelkopf, Keiran Paster, Marco~Dos Santos, Stephen McAleer, Albert~Q. Jiang, Jia Deng, Stella Biderman, and Sean Welleck.
+\newblock Llemma: An open language model for mathematics, 2023{\natexlab{b}}.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal, Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan, Child, Ramesh, Ziegler, Wu, Winter, Hesse, Chen, Sigler, Litwin, Gray, Chess, Clark, Berner, McCandlish, Radford, Sutskever, and Amodei]{brown2020language}
+Tom~B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel~M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei.
+\newblock Language models are few-shot learners, 2020.
+
+\bibitem[Charton et~al.(2021)Charton, Hayat, and Lample]{LearningAMC}
+Francois Charton, Amaury Hayat, and Guillaume Lample.
+\newblock Learning advanced mathematical computations from examples.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=-gfhS00XfKj}.
+
+\bibitem[de~Moura \& Ullrich(2021)de~Moura and Ullrich]{lean4}
+Leonardo~Mendonça de~Moura and Sebastian Ullrich.
+\newblock The lean 4 theorem prover and programming language.
+\newblock In \emph{CADE}, 2021.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:235800962}.
+
+\bibitem[Dong et~al.(2015)Dong, Wu, He, Yu, and Wang]{nmt2015baidu}
+Daxiang Dong, Hua Wu, Wei He, Dianhai Yu, and Haifeng Wang.
+\newblock Multi-task learning for multiple language translation.
+\newblock pp.\  1723--1732, 01 2015.
+\newblock \doi{10.3115/v1/P15-1166}.
+
+\bibitem[Hahn et~al.(2021)Hahn, Schmitt, Kreber, Rabe, and Finkbeiner]{TeachingLogics}
+Christopher Hahn, Frederik Schmitt, Jens~U. Kreber, Markus~Norman Rabe, and Bernd Finkbeiner.
+\newblock Teaching temporal logics to neural networks.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=dOcQK-f4byz}.
+
+\bibitem[Han et~al.(2021)Han, Babuschkin, Edwards, Neelakantan, Xu, Polu, Ray, Shyam, Ramesh, Radford, and Sutskever]{han2021unsupervised}
+Jesse~Michael Han, Igor Babuschkin, Harrison Edwards, Arvind Neelakantan, Tao Xu, Stanislas Polu, Alex Ray, Pranav Shyam, Aditya Ramesh, Alec Radford, and Ilya Sutskever.
+\newblock Unsupervised neural machine translation with generative language models only, 2021.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Burns, Basart, Zou, Mazeika, Song, and Steinhardt]{MMLU}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock \emph{CoRR}, abs/2009.03300, 2020.
+\newblock URL \url{https://arxiv.org/abs/2009.03300}.
+
+\bibitem[Jiang et~al.(2023)Jiang, Li, and Jamnik]{mma}
+Albert~Q. Jiang, Wenda Li, and Mateja Jamnik.
+\newblock Multilingual mathematical autoformalization, 2023.
+
+\bibitem[Klein et~al.(2009)Klein, Elphinstone, Heiser, Andronick, Cock, Derrin, Elkaduwe, Engelhardt, Kolanski, Norrish, Sewell, Tuch, and Winwood]{klein2009formalization}
+Gerwin Klein, Kevin Elphinstone, Gernot Heiser, June Andronick, David Cock, Philip Derrin, Dhammika Elkaduwe, Kai Engelhardt, Rafal Kolanski, Michael Norrish, Thomas Sewell, Harvey Tuch, and Simon Winwood.
+\newblock {seL4}: Formal verification of an {OS} kernel.
+\newblock In \emph{ACM Symposium on Operating Systems Principles}, pp.\  207--220, Big Sky, MT, USA, October 2009. ACM.
+
+\bibitem[Lample \& Charton(2020)Lample and Charton]{DeepLearningSymbolic}
+Guillaume Lample and François Charton.
+\newblock Deep learning for symbolic mathematics.
+\newblock In \emph{International Conference on Learning Representations}, 2020.
+\newblock URL \url{https://openreview.net/forum?id=S1eZYeHFDS}.
+
+\bibitem[Lewkowycz et~al.(2022)Lewkowycz, Andreassen, Dohan, Dyer, Michalewski, Ramasesh, Slone, Anil, Schlag, Gutman-Solo, et~al.]{solvingQR}
+Aitor Lewkowycz, Anders Andreassen, David Dohan, Ethan Dyer, Henryk Michalewski, Vinay Ramasesh, Ambrose Slone, Cem Anil, Imanol Schlag, Theo Gutman-Solo, et~al.
+\newblock Solving quantitative reasoning problems with language models.
+\newblock \emph{Advances in Neural Information Processing Systems}, 35:\penalty0 3843--3857, 2022.
+
+\bibitem[Liu et~al.(2021)Liu, Wang, Wong, Ding, Chao, Shi, and Tu]{liu2021complementarity}
+Xuebo Liu, Longyue Wang, Derek~F. Wong, Liang Ding, Lidia~S. Chao, Shuming Shi, and Zhaopeng Tu.
+\newblock On the complementarity between pre-training and back-translation for neural machine translation, 2021.
+
+\bibitem[mathlib Community(2019)]{mathlib4}
+The mathlib Community.
+\newblock The lean mathematical library.
+\newblock \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs}, 2019.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:204801213}.
+
+\bibitem[OpenAI(2023)]{openai2023gpt4}
+OpenAI.
+\newblock Gpt-4 technical report, 2023.
+
+\bibitem[Poncelas et~al.(2018)Poncelas, Shterionov, Way, de~Buy~Wenniger, and Passban]{poncelas2018investigating}
+Alberto Poncelas, Dimitar Shterionov, Andy Way, Gideon~Maillette de~Buy~Wenniger, and Peyman Passban.
+\newblock Investigating backtranslation in neural machine translation, 2018.
+
+\bibitem[Wang et~al.(2018)Wang, Kaliszyk, and Urban]{WangNMT}
+Qingxiang Wang, Cezary Kaliszyk, and Josef Urban.
+\newblock First experiments with neural translation of informal to formal mathematics.
+\newblock In Florian Rabe, William~M. Farmer, Grant~O. Passmore, and Abdou Youssef (eds.), \emph{Intelligent Computer Mathematics}, pp.\  255--270, Cham, 2018. Springer International Publishing.
+\newblock ISBN 978-3-319-96812-4.
+
+\bibitem[Wu et~al.(2016)Wu, Schuster, Chen, Le, Norouzi, Macherey, Krikun, Cao, Gao, Macherey, Klingner, Shah, Johnson, Liu, Łukasz Kaiser, Gouws, Kato, Kudo, Kazawa, Stevens, Kurian, Patil, Wang, Young, Smith, Riesa, Rudnick, Vinyals, Corrado, Hughes, and Dean]{nmt2016google}
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc~V. Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, Jeff Klingner, Apurva Shah, Melvin Johnson, Xiaobing Liu, Łukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith Stevens, George Kurian, Nishant Patil, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, and Jeffrey Dean.
+\newblock Google's neural machine translation system: Bridging the gap between human and machine translation, 2016.
+
+\bibitem[Wu et~al.(2022)Wu, Jiang, Li, Rabe, Staats, Jamnik, and Szegedy]{autoformalization}
+Yuhuai Wu, Albert~Q. Jiang, Wenda Li, Markus~N. Rabe, Charles Staats, Mateja Jamnik, and Christian Szegedy.
+\newblock Autoformalization with large language models, 2022.
+
+\bibitem[Yang et~al.(2023)Yang, Swope, Gu, Chalamala, Song, Yu, Godil, Prenger, and Anandkumar]{Leandojo}
+Kaiyu Yang, Aidan~M. Swope, Alex Gu, Rahul Chalamala, Peiyang Song, Shixing Yu, Saad Godil, Ryan Prenger, and Anima Anandkumar.
+\newblock Leandojo: Theorem proving with retrieval-augmented language models, 2023.
+
+\bibitem[Zheng et~al.(2021)Zheng, Han, and Polu]{minif2f}
+Kunhao Zheng, Jesse~Michael Han, and Stanislas Polu.
+\newblock Minif2f: a cross-system benchmark for formal olympiad-level mathematics.
+\newblock \emph{arXiv preprint arXiv:2109.00110}, 2021.
+
+\end{thebibliography}
