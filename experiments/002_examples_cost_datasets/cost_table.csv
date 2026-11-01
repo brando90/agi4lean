@@ -1,0 +1,7 @@
+method,pairs,gpt2_tokens_formal+informal,paper_table1_tokens,matches_paper,gpt4_tokens_in_estimated,gpt4_tokens_out_estimated,api_usd_estimated_gpt4_list_price,wall_clock,note
+"MMA Train (baseline, not ours)",84679,10916097,10916097,True,3736355,4724675,395.57,not logged,"not paid by us (public MMA data); the price if it were regenerated with GPT-4, instruction text not counted"
+GPT-4 MathLib4 (Full Proof),348,71550,71550,True,343666,57863,13.78,not logged,"input = 6-shot prompt (892 tokens, from lean4math_dataset_gen.py) x 348 calls + formal tokens; output = formal echo + informal; counts only the 348 kept pairs, so a lower bound (calls that were dropped or retried are not logged)"
+"GPT-4 LeanDojo (Individual Tactics), 29-pair set",29,20261,1754,False,8761,9853,0.85,not logged,"zero-shot prompt text not in any repo, so input = the data only; lower bound; no generation script or log found"
+"GPT-4 LeanDojo (Individual Tactics), 100-pair set",100,50145,1754,False,32663,13709,1.8,not logged,"zero-shot prompt text not in any repo, so input = the data only; lower bound; no generation script or log found"
+Regex-Parsed LeanDojo Proofs,2875,124782,124782,True,,,,not logged,"rule-based regex templates, no API call"
+On-the-Fly Backtranslation,none saved,none saved,not in table,,0,0,0,not logged (train.py prints elapsed time; no output saved),the synthetic informal text is generated inside the training loop (unsupervised_trainer.py) and never written to disk; no API; GPU time only
