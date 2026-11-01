@@ -1,0 +1,17 @@
+{
+ "views": 3240,
+ "skipped_short": 10,
+ "items": {
+  "ProofNet/valid": 180,
+  "ProofNet/test": 181,
+  "MiniF2F/valid": 244,
+  "MiniF2F/test": 244
+ },
+ "views_by_type": {
+  "formal_lean3": 288,
+  "formal_lean4": 864,
+  "formal_lean4_v2": 371,
+  "informal_statement": 859,
+  "informal_proof": 858
+ }
+}
