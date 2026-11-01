@@ -55,7 +55,7 @@
 % The word \textsc{Abstract} must be centered, in small caps, and in point size 12. Two
 % line spaces precede the abstract. The abstract must be limited to one paragraph.
 
-\textit{Autoformalization}, the process of transforming informal mathematical language into formal specifications and proofs remains a difficult task for state-of-the-art (large) language models. Existing works point to competing explanations for the performance gap. On one hand, large language models exhibit exceptional performance on translation tasks, suggesting their significant potential for autoformalization.  On the other hand, the quantitative reasoning capabilities of standard language models remain limited, leading to suboptimal performance on autoformalization and the subsequent task of formal theorem proving. To this end, we introduce a novel methodology that leverages backtranslation with hand-curated prompts to enhance the mathematical capabilities of language models, particularly addressing the challenge posed by the scarcity of labeled data.  Specifically, we evaluate three primary variations of this strategy: (1) on-the-fly (online) backtranslation, (2) distilled (offline) backtranslation with few-shot amplification, and (3) line-by-line proof analysis integrated with proof state information. Each variant is designed to optimize data quality over quantity, focusing on the high fidelity of generated proofs rather than sheer data scale. Our findings provide evidence that employing our proposed approaches to generate synthetic data, which prioritizes quality over volume, improves the autoformalization performance of LLMs as measured by standard benchmarks such as ProofNet. Crucially, our approach outperforms pretrained models using a minimal number of tokens. We also show, through strategic prompting and backtranslation, that our approaches surpass the performance of finetuning with extensive multilingual datasets such as MMA on ProofNet with only 1/150th of the tokens. Taken together, our methods show a promising new approach to significantly reduce the resources required to formalize proofs, thereby accelerating AI for math.
+\textit{Autoformalization}, the translation of informal mathematics into formal Lean, is limited by the scarcity of paired formal-informal data. Backtranslation, in which a model informalizes formal text to create synthetic pairs, is established in machine translation and was applied to autoformalization by ProofNet (distilled backtranslation with GPT-4). We do not claim backtranslation as new. We compare four ways of generating paired data at a small scale: (1) on-the-fly (online) backtranslation, where one model informalizes and then re-formalizes a batch inside the training loop; (2) distilled backtranslation with a six-shot GPT-4 prompt over full Mathlib4 proofs; (3) informalization of each tactic together with the proof state before and after it, a step-level form of supervision related to process reward models; and (4) regular-expression templates. Fine-tuning GPT-2 (124M parameters) on the six-shot GPT-4 data (71,550 tokens) gives a lower evaluation loss on the ProofNet test set than fine-tuning on the MMA dataset (10.9M tokens), and the other methods improve on the pretrained baseline. These results come from one small model, one benchmark and one metric (evaluation loss), and we state what is outside their scope: other formal languages, human-in-the-loop data creation, and larger models (see Limitations). We also report the cost of each generation method, examples of the generated data, and a check of every training set for overlap with ProofNet and MiniF2F.
 \end{abstract}
 
 \section{Introduction}
@@ -63,7 +63,7 @@
 
 Autoformalization first gained traction in 2018 when researchers used long short-term memory networks to generate statements in Mizar \citep{WangNMT}. More recently, experiments demonstrated promising results using a naive few-shot learning approach to translate English into Isabelle code \citep{autoformalization}.
 % P.S. i have a bias for longer paragraphs, Can revert.
-Historically, researchers have focused on merging automated theorem provers with language models, which often struggle with quantitative reasoning, limiting the types of theorems that can be expressed and solved and reducing the models' effectiveness in complex, real-world scenarios. Our study adopts a novel approach by integrating interactive theorem provers with large language models, leveraging the sequential processing capabilities of both. By fine-tuning LLMs with intermediary statements from the LeanDojo dataset \citep{Leandojo}, we aim to enhance our understanding of formal theorem provers' reasoning processes and successfully incorporate this signal into an LLM.
+Historically, researchers have focused on merging automated theorem provers with language models, which often struggle with quantitative reasoning, limiting the types of theorems that can be expressed and solved and reducing the models' effectiveness in complex, real-world scenarios. We study one way of using interactive theorem provers with language models: fine-tuning a model on intermediary proof states from the LeanDojo dataset \citep{Leandojo}, paired with informal descriptions of each tactic, to test whether this step-level signal helps autoformalization. Step-level supervision of this kind is known from process reward models \citep{lightman2023lets,uesato2022solving}; our contribution is to apply it to informalization of Lean tactics and to measure it against other generation methods, not to introduce it.
 
 
 
@@ -106,21 +106,21 @@ Our dataset, \textbf{AI4Math}, serves two primary purposes: first, to train an a
 
 Our \textbf{key contributions} are:
 \begin{enumerate}
-    \item We introduce a new paradigm for generating synthetic formal-informal paired statements, emphasizing the superiority of high-quality data over large but undifferentiated datasets. 
+    \item A comparison of four generation methods for formal-informal pairs (on-the-fly backtranslation, distilled six-shot full-proof backtranslation, tactic-level informalization with proof states, and regular-expression templates) under one fine-tuning recipe, with their token counts and estimated API cost (Table~\ref{table:cost}) and examples of each (Figure~\ref{fig:examples}).
 
-    \item We advance the discussion on data efficacy in neural language model training by demonstrating that richer prompts and high-quality Lean statement selections yield better performance than training on large, randomly diverse data.
+    \item Evidence, for GPT-2 (124M) and the ProofNet test set, that a small set of high-quality pairs (348 pairs, 71,550 tokens) reaches a lower evaluation loss than the MMA dataset (84,679 pairs, 10.9M tokens) \citep{mma}, and that tactic-level pairs with proof states improve on the pretrained baseline with 1,754 tokens.
 
-    \item By integrating proof state matching and manually curating data to include the state before and after a proof statement, we achieve dramatic improvements in model performance. This method not only optimizes the training process but does so with a minimal number of tokens, thereby enhancing computational efficiency and model effectiveness. Our approach underlines the potential of targeted and intelligent data preparation in maximizing the value of each token in autoformalization datasets.
+    \item The AI4Math datasets and models, released on Hugging Face, with an overlap check of each training set against ProofNet and MiniF2F (Appendix~\ref{app:contamination}).
 \end{enumerate}
 
-
+\paragraph{What is not new.} Backtranslation for machine translation is due to \citet{sennrich-etal-2016-improving}. Distilled backtranslation for autoformalization, in which GPT-4 informalizes Mathlib statements and a smaller model is fine-tuned on the pairs, was introduced by ProofNet \citep{azerbayev2023proofnet}, and MMA \citep{mma} scaled it to a large multilingual set. Our six-shot full-proof method follows ProofNet's recipe with a different prompt. Supervising individual steps rather than final outcomes is the idea behind process reward models \citep{lightman2023lets,uesato2022solving}. What we add is the on-the-fly variant (one model plays both directions inside the training loop, with no teacher), the use of Lean proof states before and after each tactic as the context for informalization, and a controlled comparison of these methods against MMA at small token budgets.
 
 \section{Training Data Generation via Backtranslation}
 
 Backtranslation has been a pivotal method in neural machine translation (NMT), with its demonstrated utility for enhancing training efficacy in the absence of sufficient labeled data \citep{poncelas2018investigating}. This technique was further refined in transformer models \citep{han2021unsupervised} and in preliminary experiments involving distilled backtranslation within the domain of autoformalization \citep{azerbayev2023proofnet}. We chose this methodology because it is one of the most prominent and validated methods for NMT tasks \citep{liu2021complementarity}, and has been shown to be analytically and empirically suitable for neural model training \citep{mma}.
 
 
-Our approach is to start with data in formal language (FL) and translate it into informal language (IL). We refer to this process as {\em informalization}. We demonstrate that each of these three dataset generation methodologies can improve model performance:
+Our approach is to start with data in formal language (FL) and translate it into informal language (IL). We refer to this process as {\em informalization}. We compare the following generation methods, each of which we fine-tune on with the same recipe:
 
 \begin{itemize}
 \item \textbf{On-The-Fly Backtranslation: }This strategy for data augmentation utilized a unique backtranslation approach integrated within a custom training loop. Specifically, the training loop itself has four main steps, as outlined in Figure \ref{fig:on_the_fly_process}: (1) translating a batch of FL examples to IL (2) translating the synthetic IL examples back to FL, using the (synthetic IL, FL) pairs as labeled training data (3) computing the loss of the generated FL translations compared to the original FL examples and (4) backpropogating to update the model weights.
@@ -247,6 +247,59 @@ GPT-4 LeanDojo (Individual Tactics) & 1,754\\
 \end{table}
 
 
+\section{Examples of Generated Data}
+Figure~\ref{fig:examples} shows one before/after pair per generation method, taken from the released data. Before is the formal Lean text; after is the informal text the method produced. The examples were drawn at random (seed 0) and cut to fit; five pairs per method are in \texttt{experiments/002\_examples\_cost\_datasets} of the project repository. On-the-fly backtranslation has no example: its synthetic informal text exists only inside the training loop and was not saved.
+
+\begin{figure*}[htbp]
+\centering
+\begin{tabular}{|p{0.15\linewidth}|p{0.38\linewidth}|p{0.38\linewidth}|}
+\hline
+\textbf{Method} & \textbf{Before (formal)} & \textbf{After (informal)} \\
+\hline
+MMA Train (baseline) & \texttt{theorem refl\_trans (}$\alpha$\texttt{ : X }$\cong$\texttt{ Y) : Iso.refl X }$\ll\gg$ $\alpha$ \texttt{= }$\alpha$ \texttt{:=} & For any isomorphism '$\alpha$' from 'X' to 'Y', the composition of the identity isomorphism on 'X' and '$\alpha$' is equal to '$\alpha$'. \\
+\hline
+GPT-4 MathLib4 (Full Proof) & \texttt{theorem one\_le \{a : Associates }$\alpha$\texttt{\} : 1 }$\leq$\texttt{ a := Dvd.intro \_ (one\_mul a)} & For any associate $a$ of a type $\alpha$, $1$ is less than or equal to $a$. This is proven by introducing a divisor through the property that multiplying $1$ by $a$ gives $a$. \\
+\hline
+GPT-4 LeanDojo (Individual Tactics) & state before: $T \models \phi \leftrightarrow \exists T_0, T_0 \subseteq T \wedge T_0 \models \phi$; tactic: \texttt{simp only [models\_iff\_not\_satisfiable]}; state after: $\vdash \neg\,\mathrm{IsSatisfiable}(T \cup \{\neg\phi\}) \leftrightarrow \dots$ & In this scenario, we're dealing with a formal language $L$ and a theory $T$ within that language, [...] The goal is to prove the equivalence between $T$ proving $\phi$ and the existence of a subtheory $T_0$ of $T$ that also proves $\phi$. [...] \\
+\hline
+Regex-Parsed LeanDojo Proofs & \texttt{apply Nat.succ\_pos} & Here, we apply the theorem/lemma Nat.succ\_pos. \\
+\hline
+\end{tabular}
+\caption{\textbf{Before/after examples for each generation method with saved data}. [...] marks text cut for space. Rows are from \texttt{AI4M/mma-dataset} (row 55125), \texttt{AI4M/gpt4-more} (row 183), \texttt{AI4M/state\_info\_informalization} (row 6) and \texttt{AI4M/regexInformalizationData} (row 601).}
+\label{fig:examples}
+\end{figure*}
+
+\subsection{Cost of each generation method}
+Table~\ref{table:cost} gives, for each method, the number of pairs, the GPT-2 token count, and an estimate of the GPT-4 API cost at OpenAI list prices (\$30 per million input tokens, \$60 per million output tokens). The dollar figures are estimates, not bills: no billing record or generation log survives, so they are lower bounds that count only the pairs we kept (calls that were dropped or retried are not logged), and wall-clock time was not recorded for any method. The MMA row is the price of regenerating its data with GPT-4; we did not pay it. The authors of MMA report \$3,500 for 332,000 informalized theorems \citep{mma}. The 1,754-token figure for the individual-tactics set in Table~\ref{table:dataset_composition} does not match either public individual-tactics set (29 pairs with 20,261 tokens; 100 pairs with 50,145 tokens); we report both.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{|p{0.30\linewidth}|r|r|r|}
+\hline
+\textbf{Method} & \textbf{Pairs} & \textbf{GPT-2 tokens} & \textbf{Est. API cost (USD)} \\
+\hline
+MMA Train (not paid by us) & 84,679 & 10,916,097 & 396 \\
+\hline
+GPT-4 MathLib4 (Full Proof) & 348 & 71,550 & $\geq$ 14 \\
+\hline
+GPT-4 LeanDojo (Individual Tactics), 29-pair set & 29 & 20,261 & $\geq$ 1 \\
+\hline
+GPT-4 LeanDojo (Individual Tactics), 100-pair set & 100 & 50,145 & $\geq$ 2 \\
+\hline
+Regex-Parsed LeanDojo Proofs & 2,875 & 124,782 & 0 (no API call) \\
+\hline
+On-the-Fly Backtranslation & not saved & not saved & 0 (GPU time only) \\
+\hline
+\end{tabular}
+\caption{\textbf{Size and estimated GPT-4 cost of each generation method.} Estimates at list price, lower bounds, from \texttt{experiments/002\_examples\_cost\_datasets}. Wall-clock time was not logged. For the individual-tactics sets the zero-shot prompt text was not saved, so the input cost counts only the data.}
+\label{table:cost}
+\end{table}
+
+\subsection{Overlap with the evaluation sets}
+We checked every dataset in the Hugging Face organizations AI4M and UDACA (40 files from 33 repositories) for text overlap with the ProofNet and MiniF2F validation and test sets, by exact match and by at least 80\% shared 8-grams (Appendix~\ref{app:contamination}). The datasets used for the results in this paper are clean: MMA (train, validation, test), \texttt{gpt4-more} (the six-shot full-proof data), both individual-tactics sets and the regex sets have no overlapping item with ProofNet or MiniF2F. Several other released datasets do overlap, for example sets built from ProofNet itself and the data-selection sets built with ProofNet as the target; results from models trained on them must not be reported on ProofNet. This check is text matching only, on CPU, and does not show which data any given checkpoint was trained on.
+
+
 \begin{figure*}[htbp]
 \centering
 \begin{mdframed}[linewidth=1pt, roundcorner=10pt, backgroundcolor=gray!10]
@@ -325,6 +378,8 @@ We have three major observations:
 
 
 \section{Related Work}
+The closest prior work is ProofNet \citep{azerbayev2023proofnet}, which introduced distilled backtranslation for autoformalization (GPT-4 informalizes Mathlib statements, a smaller model is fine-tuned on the pairs), and MMA \citep{mma}, which applied zero-shot GPT-4 informalization at scale across several formal languages. Our six-shot full-proof data is a variant of ProofNet's recipe, and MMA is our main baseline. Backtranslation itself comes from machine translation \citep{sennrich-etal-2016-improving,poncelas2018investigating}. Process reward models \citep{lightman2023lets,uesato2022solving} supervise each reasoning step rather than the final answer; our tactic-level data uses the same idea for informalization, with Lean proof states as the context, and we do not train a reward model.
+
 The Multilingual Mathematical Autoformalization (MMA) dataset also uses powerful models GPT-4 to translate from formal language (FL) to informal language (IL) via zero-shot instruction prompting on a large, diverse corpus of mathlib4 data \citep{mma}. Our approach enhances the efficiency of this process by applying a more intense six-shot prompting strategy on mathlib4 statements; the fine-tuning performance of the resulting dataset not only surpasses that of the MMA dataset on the ProofNet benchmark but does so using only 1/150th of the tokens: significantly optimizing resource use while enhancing output quality. Utilizing a regex, we parsed Lean files from mathlib into over 100,000 tactic proof scripts, and we call this methodology using the “Full-Proof” in pregenerating informal-formal pairs for informalization via GPT-4. Despite the high number of parsed scripts, at an estimated \$0.05 per informalization we were only able to informalize a subset of this collection.
 
 Our dataset also utilizes LeanDojo, an open-source platform that offers a comprehensive dataset of over 90,000 Lean theorems. Existing models like ReProver, a retrieval-augmented language model, have demonstrated superior performance compared to established models such as Tidy and GPT-4 \citep{Leandojo}. However, while retrieval-augmented models like ReProver are promising in leveraging formal corpora to enhance LLMs, they rely heavily on automated theorem provers. These models often skip over the detailed intermediate steps that are critical for understanding complex mathematical logic, thereby restricting the systems' flexibility and explainability.
@@ -333,23 +388,24 @@ Moreover, the prevalent use of first-order logic in these models constrains thei
 
 \section{Discussion}
 
-Our paper introduces a novel dataset that can be used for enhancing the autoformalization capabilities of large language models. We demonstrate evidence that models can attain superior performance on autoformalization benchmarks such as ProofNet by training on \textbf{AI4Math}, and our generation strategies can significantly reduce the number of tokens required compared to MMA. \label{discussion}
+Our paper releases datasets that can be used for enhancing the autoformalization capabilities of large language models. We provide evidence, for GPT-2 and evaluation loss on ProofNet, that models can reach lower loss by training on \textbf{AI4Math}, and our generation strategies can significantly reduce the number of tokens required compared to MMA. \label{discussion}
 
-We also note several limitations with our method. Firstly, our fine-tuning was exclusively conducted using GPT-2. In future research iterations, we anticipate that employing more powerful models —-- such as Mistral 7B or Llemma 7B for fine-tuning could lead to even better performance. Our "On-The-Fly" backtranslation process was especially constrained by the smaller model size used, and using more powerful models for fine-tuning in future iterations could enhance the quality of informalizations. 
-
-Cost constraints were another factor that limited our dataset's expansion, as more sophisticated prompt engineering with GPT-4, particularly for translating and segmenting entire proofs, proved costly. Despite the higher expense, these backtranslation methods surpassed baseline performance with fewer tokens, indicating superior data quality. Given its potential, this approach merits further exploration if sufficient funding can support the additional costs. 
+\section{Limitations}
+\begin{itemize}
+    \item \textbf{One small model, one benchmark, one metric.} The results above fine-tune GPT-2 (124M) and report evaluation loss on the ProofNet test set. Evaluation loss measures how well the model predicts the Lean text, not whether a generated statement compiles or is faithful. Larger and math-specialized models, MiniF2F, and Lean-checked pass@$k$ are the subject of the new experiments listed in the response to reviewers.
+    \item \textbf{Small differences.} The gap between the best two GPT-4 datasets is small, and per-example losses were not saved, so we cannot test whether it exceeds seed-to-seed noise. Only GPT-4 data beat MMA here; the on-the-fly, regex and individual-tactics sets do not.
+    \item \textbf{Other formal languages.} We study Lean 4 only. Our methods rely on Lean structure (LeanDojo tactic states, regex templates over Lean tactics), and Metamath proofs have no tactic state, so these methods would need a different step segmentation there. We have not tried Metamath or other formal languages and do not claim the results transfer.
+    \item \textbf{Human in the loop.} All pairs are generated automatically; the only human-written text is the six examples in the prompt. We did not study human review or correction of the informalizations, nor human-in-the-loop evaluation, and leave both out of scope.
+    \item \textbf{Cost estimates.} Costs are list-price lower bounds, because no billing or wall-clock record exists (Table~\ref{table:cost}).
+    \item \textbf{Overlap.} Some released datasets contain ProofNet or MiniF2F items (Appendix~\ref{app:contamination}); the check is text matching and does not identify what any checkpoint saw.
+\end{itemize}
 
 \section{Future Work}
 
-In our current research, we concentrated on autoformalizing theorem statements rather than generating complete formal proofs. This focus was primarily driven by our goal to streamline the process of translating natural language into formal language theorems, which are integral to the groundwork of interactive theorem proving (ITP). However, a significant next step in our exploration involves assessing whether the entire proofs or tactic scripts, when generated by our model, can be successfully compiled within the Lean4 environment.
-
-Additionally, leveraging Interactive Theorem Provers (ITPs) to extract datasets of intermediate proof steps presents a novel opportunity for advancing the task of autoformalization. By sequentially informalizing intermediate statements within a proof, we can generate a dataset that captures the individual steps undertaken by ITPs. This data can subsequently be used to train an LLM, effectively replicating the sequential reasoning performed by ITPs. Since this approach looks to model the incremental deduction used by interactive theorem provers directly, we predict that this could enable language models to develop richer capabilities for reasoning tasks and enable generalization beyond their training proofs.
-
-The ability for a model to generate not just the theorem statements but also the accompanying proofs would mark a substantial leap forward in automating the theorem proving process. It would not only enhance the efficiency and accessibility of formal verification but also potentially transform how complex mathematical and logical reasoning is conducted in computational settings. Thus, the next phase of our research will be dedicated to testing the compatibility and correctness of model-generated proofs with Lean4, aiming to bridge the gap between automated theorem generation and its practical application in ITP systems. This endeavor will necessitate a deeper integration of our model's outputs with the stringent syntax and logical framework of Lean4, posing a challenging yet essential milestone towards fully automated theorem proving.
+We concentrated on autoformalizing theorem statements, not on generating complete formal proofs. A next step is to test whether proofs or tactic scripts generated by fine-tuned models compile in Lean 4, which is the Lean-checked pass@$k$ evaluation that the response to reviewers reports for the new experiments. A second step is to scale the tactic-level data: informalizing each intermediate proof state yields step-level pairs that capture the incremental deduction of an interactive theorem prover, and we would test whether training on them transfers beyond the training proofs.
 
 \section{Conclusion}
-Our paper has several larger implications for the field of autoformalization. By focusing on autoformalizing theorem statements, we streamline the process of translating natural language into formal language, which is critical for the groundwork of interactive theorem proving. Successfully training an agent for precise autoformalization could drastically reduce the resources needed to convert extensive natural-language mathematical proofs into formal language. This progress would enhance the accessibility and efficiency of automated theorem proving and potentially quicken advancements in related fields like formal verification and program synthesis. Looking forward, a skilled autoformalizer could make all mathematical knowledge, currently documented primarily in natural language, programmable —-- significantly broadening the usability of interactive theorem proving systems and accelerating the growth of human mathematical knowledge.
-
+We compared four ways of generating formal-informal pairs for autoformalization with GPT-2 (124M) on the ProofNet test set. Six-shot GPT-4 informalization of full Mathlib4 proofs reached a lower evaluation loss than the MMA dataset with 71,550 tokens instead of 10.9M, and tactic-level pairs with proof states improved on the pretrained baseline with very little data. The claim is limited to one small model, one benchmark and one metric; we report costs, examples and an overlap check so that these results can be reproduced and extended.
 
 \section{Acknowledgments}
 This project was the final assignment for Stanford's CS197: Computer Science Research, a course that teaches undergraduates and junior students fast iteration and research methodologies.
@@ -532,5 +588,31 @@ At the end of this explanation, I will give you 2 things. The first is a list of
 \label{fig:verbatim_example}
 \end{figure*}
 
+
+
+\section{Appendix D: Overlap with ProofNet and MiniF2F}
+\label{app:contamination}
+A text-matching check on CPU (no model, no Lean). An evaluation item is counted as hit if any of its views (formal statement, informal statement, informal proof) is found in a training record: exact (the item's tokens appear contiguously) / at least 80\% of its 8-grams. Evaluation sets: ProofNet validation (180 items) and test (181), MiniF2F validation (244) and test (244). All 40 files and the method are in \texttt{experiments/01\_contamination\_check}.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{|l|r|c|c|c|c|}
+\hline
+\textbf{Training set} & \textbf{Records} & \textbf{PN valid} & \textbf{PN test} & \textbf{MF valid} & \textbf{MF test} \\
+\hline
+mma-dataset (train) & 84,679 & 0/0 & 0/0 & 0/0 & 0/0 \\
+mma-dataset (valid) & 1,930 & 0/0 & 0/0 & 0/0 & 0/0 \\
+mma-dataset (test) & 1,927 & 0/0 & 0/0 & 0/0 & 0/0 \\
+gpt4-more (Full Proof) & 348 & 0/0 & 0/0 & 0/0 & 0/0 \\
+state\_info\_informalization & 29 & 0/0 & 0/0 & 0/0 & 0/0 \\
+stateInfoInformalizationBig & 100 & 0/0 & 0/0 & 0/0 & 0/0 \\
+regexInformalizationData & 2,875 & 0/0 & 0/0 & 0/0 & 0/0 \\
+leandojo-informalized & 31,127 & 0/0 & 0/1 & 3/4 & 0/0 \\
+\hline
+\end{tabular}
+\caption{\textbf{Overlap of the training sets used in this paper with the evaluation sets} (exact / at least 80\% of 8-grams; PN = ProofNet, MF = MiniF2F). The full table has 40 files; datasets built from ProofNet or with ProofNet as the data-selection target (for example the LESS and ZipFit sets) contain all or most of its validation items.}
+\label{table:contamination}
+\end{table}
 
 \end{document}

@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -71,6 +71,10 @@ Aitor Lewkowycz, Anders Andreassen, David Dohan, Ethan Dyer, Henryk Michalewski,
 \newblock Solving quantitative reasoning problems with language models.
 \newblock \emph{Advances in Neural Information Processing Systems}, 35:\penalty0 3843--3857, 2022.
 
+\bibitem[Lightman et~al.(2023)Lightman, Kosaraju, Burda, Edwards, Baker, Lee, Leike, Schulman, Sutskever, and Cobbe]{lightman2023lets}
+Hunter Lightman, Vineet Kosaraju, Yura Burda, Harri Edwards, Bowen Baker, Teddy Lee, Jan Leike, John Schulman, Ilya Sutskever, and Karl Cobbe.
+\newblock Let's verify step by step, 2023.
+
 \bibitem[Liu et~al.(2021)Liu, Wang, Wong, Ding, Chao, Shi, and Tu]{liu2021complementarity}
 Xuebo Liu, Longyue Wang, Derek~F. Wong, Liang Ding, Lidia~S. Chao, Shuming Shi, and Zhaopeng Tu.
 \newblock On the complementarity between pre-training and back-translation for neural machine translation, 2021.
@@ -88,6 +92,17 @@ OpenAI.
 \bibitem[Poncelas et~al.(2018)Poncelas, Shterionov, Way, de~Buy~Wenniger, and Passban]{poncelas2018investigating}
 Alberto Poncelas, Dimitar Shterionov, Andy Way, Gideon~Maillette de~Buy~Wenniger, and Peyman Passban.
 \newblock Investigating backtranslation in neural machine translation, 2018.
+
+\bibitem[Sennrich et~al.(2016)Sennrich, Haddow, and Birch]{sennrich-etal-2016-improving}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Improving neural machine translation models with monolingual data.
+\newblock In Katrin Erk and Noah~A. Smith (eds.), \emph{Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pp.\  86--96, Berlin, Germany, August 2016. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/P16-1009}.
+\newblock URL \url{https://aclanthology.org/P16-1009}.
+
+\bibitem[Uesato et~al.(2022)Uesato, Kushman, Kumar, Song, Siegel, Wang, Creswell, Irving, and Higgins]{uesato2022solving}
+Jonathan Uesato, Nate Kushman, Ramana Kumar, Francis Song, Noah Siegel, Lisa Wang, Antonia Creswell, Geoffrey Irving, and Irina Higgins.
+\newblock Solving math word problems with process- and outcome-based feedback, 2022.
 
 \bibitem[Wang et~al.(2018)Wang, Kaliszyk, and Urban]{WangNMT}
 Qingxiang Wang, Cezary Kaliszyk, and Josef Urban.
