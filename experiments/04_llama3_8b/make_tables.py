@@ -15,7 +15,7 @@ runs = [("base (3-shot prompt)", "base", "fewshot", ["proofnet_lean4"]),
         ("base (training prompt, no shots)", "base", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
         ("+ gpt4-more", "gpt4more", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
         ("+ MMA", "mma", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
-        ("+ on-the-fly backtranslation", "otf", "nl_eos", ["proofnet_lean4", "minif2f_lean4"])]
+        ("+ on-the-fly backtranslation", "otf2", "nl_eos", ["proofnet_lean4", "minif2f_lean4"])]
 
 
 def pk(n, c, k):
@@ -51,8 +51,8 @@ def table(s):
     return "\n".join(out)
 
 
-ce = {m: json.load(open(f"{d}/ce/{m}.summary.json")) for m in ["base", "gpt4more", "mma", "otf"]}
-names = {"base": "base", "gpt4more": "+ gpt4-more", "mma": "+ MMA", "otf": "+ on-the-fly backtranslation"}
+ce = {m: json.load(open(f"{d}/ce/{m}.summary.json")) for m in ["base", "gpt4more", "mma", "otf2"]}
+names = {"base": "base", "gpt4more": "+ gpt4-more", "mma": "+ MMA", "otf2": "+ on-the-fly backtranslation"}
 cet = ["| model | ProofNet Lean 3 CE | TFCE | TFA | ProofNet Lean 4 CE | TFCE | TFA | MiniF2F CE | TFCE | TFA |", "|---|---|---|---|---|---|---|---|---|---|"]
 for m in ce:
     c = []

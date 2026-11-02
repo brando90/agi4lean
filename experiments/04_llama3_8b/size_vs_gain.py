@@ -11,7 +11,7 @@ def pk4(name, fm, s, k):
     pt = json.load(open(f"results/passk/{name}__{fm}__{s}_test.per_task.json"))
     f = lambda n, c: 1.0 if n - c < k else 1.0 - math.comb(n - c, k) / math.comb(n, k)
     return 100 * sum(f(t["n"], t["c"]) for t in pt) / len(pt)
-ce4 = {m: json.load(open(f"results/ce/{m}.summary.json")) for m in ["base", "gpt4more", "mma", "otf"]}
+ce4 = {m: json.load(open(f"results/ce/{m}.summary.json")) for m in ["base", "gpt4more", "mma", "otf2"]}
 def ce3(m, key): return float(c3[(m, "proofnet_lean3", "nl_eos")][key])
 rows = []
 # (size, family, base id, fine-tune label, fine-tuned id, how)
@@ -30,7 +30,7 @@ for size, f, base, fts in fam:
         out.append(f"| {size} | {f} | {lab} | {cb:.2f} -> {cf:.2f} ({cf-cb:+.2f}) | {tb:.1f} -> {tf:.1f} ({tf-tb:+.1f}) | {pn} | {mf} |")
 cb = ce4["base"]["proofnet_lean3:test"]; tb = 100 * cb["tfa_mean"]
 b16 = pk4("base", "fewshot", "proofnet_lean4", 16)
-for lab, m in [("gpt4-more (3 ep, LoRA)", "gpt4more"), ("MMA (1 ep, LoRA)", "mma"), ("on-the-fly backtranslation (3 ep, LoRA)", "otf")]:
+for lab, m in [("gpt4-more (3 ep, LoRA)", "gpt4more"), ("MMA (1 ep, LoRA)", "mma"), ("on-the-fly backtranslation (3 ep, LoRA)", "otf2")]:
     c = ce4[m]["proofnet_lean3:test"]; tf = 100 * c["tfa_mean"]
     p = pk4(m, "nl_eos", "proofnet_lean4", 16); q = pk4(m, "nl_eos", "minif2f_lean4", 16)
     out.append(f"| 8B | Llama-3-8B | {lab} | {cb['ce_full_paper_style']:.2f} -> {c['ce_full_paper_style']:.2f} ({c['ce_full_paper_style']-cb['ce_full_paper_style']:+.2f}) | {tb:.1f} -> {tf:.1f} ({tf-tb:+.1f}) | {b16:.1f} -> {p:.1f} ({p-b16:+.1f}) | base not run with a comparable prompt (0.0 with the training prompt) -> {q:.1f} |")

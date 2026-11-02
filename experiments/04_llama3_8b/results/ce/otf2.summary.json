@@ -1,0 +1,23 @@
+{
+ "proofnet_lean3:test": {
+  "n": 186,
+  "ce_full_paper_style": 1.7598657790549799,
+  "ce_full_token_mean": 1.7215918545842008,
+  "tfce_mean": 1.6869274422686587,
+  "tfa_mean": 0.6649229544144805
+ },
+ "proofnet_lean4:test": {
+  "n": 183,
+  "ce_full_paper_style": 1.729831357161938,
+  "ce_full_token_mean": 1.6980707514295625,
+  "tfce_mean": 1.6385855655201147,
+  "tfa_mean": 0.6664234876958399
+ },
+ "minif2f_lean4:test": {
+  "n": 244,
+  "ce_full_paper_style": 1.7884605103809965,
+  "ce_full_token_mean": 1.7555024538918955,
+  "tfce_mean": 1.4511384524282862,
+  "tfa_mean": 0.6996641543800713
+ }
+}

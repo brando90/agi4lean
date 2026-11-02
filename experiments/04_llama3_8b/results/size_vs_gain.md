@@ -7,4 +7,4 @@
 | 2B | Gemma-2-2B | MMA | 2.50 -> 1.81 (-0.70) | 40.2 -> 60.2 (+20.0) | 15.6 -> 47.0 (+31.5) | 67.7 -> 93.6 (+25.9) |
 | 8B | Llama-3-8B | gpt4-more (3 ep, LoRA) | 1.97 -> 1.61 (-0.37) | 57.3 -> 66.4 (+9.1) | 41.4 -> 24.0 (-17.4) | base not run with a comparable prompt (0.0 with the training prompt) -> 70.9 |
 | 8B | Llama-3-8B | MMA (1 ep, LoRA) | 1.97 -> 1.80 (-0.18) | 57.3 -> 65.3 (+8.0) | 41.4 -> 23.6 (-17.8) | base not run with a comparable prompt (0.0 with the training prompt) -> 80.0 |
-| 8B | Llama-3-8B | on-the-fly backtranslation (3 ep, LoRA) | 1.97 -> 1.53 (-0.45) | 57.3 -> 67.2 (+9.9) | 41.4 -> 43.4 (+2.0) | base not run with a comparable prompt (0.0 with the training prompt) -> 89.7 |
+| 8B | Llama-3-8B | on-the-fly backtranslation (3 ep, LoRA) | 1.97 -> 1.76 (-0.21) | 57.3 -> 66.5 (+9.2) | 41.4 -> 37.7 (-3.7) | base not run with a comparable prompt (0.0 with the training prompt) -> 83.9 |

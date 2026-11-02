@@ -5,7 +5,7 @@ Example: python aggregate.py results
 import csv, glob, json, os, sys
 
 d = sys.argv[1] if len(sys.argv) > 1 else "results"
-order = ["base", "gpt4more", "mma", "otf"]
+order = ["base", "gpt4more", "mma", "otf2"]
 label = {"base": "Llama-3-8B base", "gpt4more": "+ gpt4-more (LoRA, 3 ep)", "mma": "+ MMA (LoRA, 1 ep)",
          "otf": "+ on-the-fly backtranslation (LoRA, 3 ep)"}
 ce, pk = {}, {}

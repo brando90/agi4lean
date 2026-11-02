@@ -1,0 +1,250 @@
+{
+ "data": "otf",
+ "rows": 2000,
+ "epochs": 3,
+ "steps": 375,
+ "batch": 16,
+ "lr": 0.0001,
+ "tokens_seen": 504045,
+ "train_seconds": 3459,
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "base": "meta-llama/Meta-Llama-3-8B",
+ "lora": {
+  "r": 64,
+  "alpha": 128,
+  "dropout": 0.05,
+  "targets": "all linear"
+ },
+ "seed": 0,
+ "otf_examples": [
+  {
+   "step": 0,
+   "informal_written_by_model": "If $b₁$ is less than $b₂$, then the pair of $a$ and $b₁$ is less than the pair of $a$ and $b₂$.",
+   "lean": "theorem pair_lt_pair_right (a) {b₁ b₂} (h : b₁ < b₂) : pair a b₁ < pair a b₂ :=",
+   "bad_share_so_far": 0.0
+  },
+  {
+   "step": 10,
+   "informal_written_by_model": "The reverse of the image of $p$ under $f$ is equal to the image of the reverse of $p$ under $f$.",
+   "lean": "theorem reverse_map : (p.map f).reverse = p.reverse.map f :=",
+   "bad_share_so_far": 0.006
+  },
+  {
+   "step": 20,
+   "informal_written_by_model": "The homomorphism of the isomorphism of the cokernels of $f$ and $g$ is equal to the homomorphism of the cokernel of $g$ composed with the homomorphism of the cokernel of $f$.",
+   "lean": "theorem cokernelIsoOfEq_hom_comp_desc {Z} {f g : X ⟶ Y} [HasCokernel f] [HasCokernel g] (h : f = g)\n    (e : Y ⟶ Z) (he) :\n    (cokernelIsoOfEq h).hom ≫ cokernel.desc _ e he = cokernel.desc _ e (by simp [h, he]) :=",
+   "bad_share_so_far": 0.003
+  },
+  {
+   "step": 30,
+   "informal_written_by_model": "The minimum of $a$ and $b$ is equal to the minimum of $a$ and $b$.",
+   "lean": "theorem cast_min [LinearOrderedSemiring α] {a b : ℕ} : ((min a b : ℕ) : α) = min (a : α) b :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 40,
+   "informal_written_by_model": "The coefficient of $φ$ times the monomial of $a$ raised to the power of $n$ at $m$ plus $n$ is equal to the coefficient of $φ$ at $m$ times $a$.",
+   "lean": "theorem coeff_add_mul_monomial (a : R) :\n    coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 50,
+   "informal_written_by_model": "If $a$ is in $ca$ and $ca$ is a lift of $cb$ under $R$, then there exists a $b$ in $cb$ such that $R$ holds between $a$ and $b$.",
+   "lean": "theorem exists_of_LiftRel_left {R : α → β → Prop} {ca cb} (H : LiftRel R ca cb) {a} (h : a ∈ ca) :\n    ∃ b, b ∈ cb ∧ R a b :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 60,
+   "informal_written_by_model": "The statement that $0$ is less than $ℵ₀$ is true.",
+   "lean": "theorem aleph0_pos : 0 < ℵ₀ :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 70,
+   "informal_written_by_model": "If $x$ divides $y$, then $x$ divides $y$ raised to the power of $n$ for all $n$ greater than $0$.",
+   "lean": "theorem dvd_pow {x y : M} (hxy : x ∣ y) : ∀ {n : ℕ} (_ : n ≠ 0), x ∣ y ^ n",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 80,
+   "informal_written_by_model": "The ordinal $a$ is less than or equal to $1$ if and only if $a$ is equal to $0$ or $a$ is equal to $1$.",
+   "lean": "theorem le_one_iff {a : Ordinal} : a ≤ 1 ↔ a = 0 ∨ a = 1 :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 90,
+   "informal_written_by_model": "The product of the absolute value of $a$ and the absolute value of $a$ is equal to the product of $a$ and $a$.",
+   "lean": "theorem abs_mul_abs_self (a : α) : |a| * |a| = a * a :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 100,
+   "informal_written_by_model": "If $P$ is a monic polynomial, then $P$ is a monic polynomial.",
+   "lean": "theorem monic_of_c_eq_one (ha : P.a = 0) (hb : P.b = 0) (hc : P.c = 1) : P.toPoly.Monic :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 110,
+   "informal_written_by_model": "The statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the set of $a$ is equivalent to the statement that $b$ is in the",
+   "lean": "theorem doset_eq_of_mem {H K : Subgroup G} {a b : G} (hb : b ∈ doset a H K) :\n    doset b H K = doset a H K :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 120,
+   "informal_written_by_model": "If $f$ is right adjoint to $g$, and $e$ is an order isomorphism from $γ$ to $α$, then $f$ of $e$ is right adjoint to $e$'s inverse applied to $g$.",
+   "lean": "theorem comp_orderIso [Preorder α] [Preorder β] [Preorder γ] {f : α → β} {g : β → α}\n    (h : IsOrderRightAdjoint f g) (e : γ ≃o α) : IsOrderRightAdjoint (f ∘ e) (e.symm ∘ g) :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 130,
+   "informal_written_by_model": "The sine of $x$ minus $\\frac{\\pi}{2}$ is equal to the negative of the cosine of $x$.",
+   "lean": "theorem sin_sub_pi_div_two (x : ℝ) : sin (x - π / 2) = -cos x :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 140,
+   "informal_written_by_model": "The statement that $f$ has a sum of $0$ is equivalent to the statement that $f$ of $x$ is equal to $0$ for all $x$.",
+   "lean": "theorem hasSum_zero_iff : HasSum f 0 ↔ ∀ x, f x = 0 :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 150,
+   "informal_written_by_model": "The function that maps $p$ to $p$ applied to $i$ is continuous.",
+   "lean": "theorem continuous_apply (i : ι) : Continuous fun p : ∀ i, π i => p i :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 160,
+   "informal_written_by_model": "If $p$ is true for all $x$ in the neighborhood of $x$, then there exists a neighborhood of $x$ such that $p$ is true for all $y$ in the neighborhood of $x$.",
+   "lean": "theorem Eventually.exists_mem {p : α → Prop} {f : Filter α} (hp : ∀ᶠ x in f, p x) :\n    ∃ v ∈ f, ∀ y ∈ v, p y :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 170,
+   "informal_written_by_model": "The linear map from $E$ to $F$ to $G$ is bounded linear.",
+   "lean": "theorem ContinuousLinearMap.isBoundedLinearMap_comp_left (g : F →L[𝕜] G) :\n    IsBoundedLinearMap 𝕜 fun f : E →L[𝕜] F => ContinuousLinearMap.comp g f :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 180,
+   "informal_written_by_model": "There exists an element $r$ of $R$ such that $r$ is in $f$ of $i$ and $r$ is in $f$ of $j$ for all $j$ in $s$ and $j$ is not equal to $i$.",
+   "lean": "theorem exists_sub_one_mem_and_mem (s : Finset ι) {f : ι → Ideal R}\n    (hf : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → f i ⊔ f j = ⊤) (i : ι) (his : i ∈ s) :\n    ∃ r : R, r - 1 ∈ f i ∧ ∀ j ∈ s, j ≠ i → r ∈ f j :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 190,
+   "informal_written_by_model": "If $a$ is positive, then $a$ is less than $a$ times $b$ if and only if $1$ is less than $b$.",
+   "lean": "theorem lt_mul_iff_one_lt_right [PosMulStrictMono α] [PosMulReflectLT α] (a0 : 0 < a) :\n    a < a * b ↔ 1 < b :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 200,
+   "informal_written_by_model": "The vector addition of $v$ and $p$ is equal to the vector addition of the second component of $v$ and $p$.",
+   "lean": "theorem erase_right_comm {a b : α} {s : Finset α} : erase (erase s a) b = erase (erase s b) a :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 210,
+   "informal_written_by_model": "The factors of the natural number $a$ is equal to the factors of $a$.",
+   "lean": "theorem factors_mk (a : α) (h : a ≠ 0) : (Associates.mk a).factors = factors' a :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 220,
+   "informal_written_by_model": "If $V₂$ is a subset of $V₁$, and $U$ is orthogonal to $V₁$, then $U$ is orthogonal to $V₂$.",
+   "lean": "theorem IsOrtho.mono_right {U V₁ V₂ : Submodule 𝕜 E} (hV : V₂ ≤ V₁) (h : U ⟂ V₁) : U ⟂ V₂ :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 230,
+   "informal_written_by_model": "The vector from $f$ of $a$ to $f$ of $b$, when multiplied by $r$, is less than $f$ of $c$ if and only if the slope of $f$ of $c$ to $b$ is less than the slope of $f$ of $a$ to $c$.",
+   "lean": "theorem lineMap_lt_map_iff_slope_lt_slope (hab : a < b) (h₀ : 0 < r) (h₁ : r < 1) :\n    lineMap (f a) (f b) r < f c ↔ slope f c b < slope f a c :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 240,
+   "informal_written_by_model": "The function $lpBcfₗᵢ$ of $f$ is equal to $f$.",
+   "lean": "theorem coe_lpBcfₗᵢ (f : lp (fun _ : α => E) ∞) : (lpBcfₗᵢ E 𝕜 f : α → E) = f :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 250,
+   "informal_written_by_model": "The image of the identity linear map of $S$ is equal to $S$.",
+   "lean": "theorem map_id (S : ConvexCone 𝕜 E) : S.map LinearMap.id = S :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 260,
+   "informal_written_by_model": "The neighborhood of infinity is equal to the intersection of the neighborhood of $r$ for all $r$ in the positive real numbers.",
+   "lean": "theorem nhds_top' : 𝓝 ∞ = ⨅ r : ℝ≥0, 𝓟 (Ioi ↑r) :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 270,
+   "informal_written_by_model": "The distance between $n$ and $k$ is equal to the distance between $l$ and $m$ if and only if $n$ plus $m$ is equal to $k$ plus $l$.",
+   "lean": "theorem dist_eq_intro {n m k l : ℕ} (h : n + m = k + l) : dist n k = dist l m :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 280,
+   "informal_written_by_model": "The intervals from $f$ of $n$ to $f$ of $pred$ of $n$ are pairwise disjoint.",
+   "lean": "theorem pairwise_disjoint_on_Ico_pred [PredOrder α] [Preorder β] {f : α → β} (hf : Antitone f) :\n    Pairwise (Disjoint on fun n => Ico (f n) (f (pred n))) :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 290,
+   "informal_written_by_model": "The statement that the set of $U$ is not nonempty is equivalent to the statement that $U$ is equal to the bottom of the submonoid of $α$.",
+   "lean": "theorem not_nonempty_iff_eq_bot (U : Opens α) : ¬Set.Nonempty (U : Set α) ↔ U = ⊥ :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 300,
+   "informal_written_by_model": "If the cardinality of $s$ is less than or equal to $1$, then there exists an $x$ such that $s$ is a subset of the singleton of $x$.",
+   "lean": "theorem ncard_le_one_iff_subset_singleton [Nonempty α]\n  (hs : s.Finite := by toFinite_tac) :\n    s.ncard ≤ 1 ↔ ∃ x : α, s ⊆ {x} :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 310,
+   "informal_written_by_model": "The negation of $x$ being right is equivalent to $x$ being left.",
+   "lean": "theorem Not_isRight : ¬x.isRight ↔ x.isLeft :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 320,
+   "informal_written_by_model": "If $m$ is less than or equal to $m$ times $n$, then $m$ is less than or equal to $m$ times $n$.",
+   "lean": "theorem le_mul_of_pos_right (h : 0 < n) : m ≤ m * n :=",
+   "bad_share_so_far": 0.001
+  },
+  {
+   "step": 330,
+   "informal_written_by_model": "The derivative of $c$ raised to the power of $n$ within $s$ at $x$ is equal to the product of $n$, $c$ raised to the power of $n$ minus $1$, and the derivative of $c$ within $s$ at $x$.",
+   "lean": "theorem derivWithin_pow' (hc : DifferentiableWithinAt 𝕜 c s x) (hxs : UniqueDiffWithinAt 𝕜 s x) :\n    derivWithin (fun x => c x ^ n) s x = (n : 𝕜) * c x ^ (n - 1) * derivWithin c s x :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 340,
+   "informal_written_by_model": "The statement that $q$ is a liftPPreservation is equivalent to the statement that $q$ is uniform.",
+   "lean": "theorem liftpPreservation_iff_uniform : q.LiftPPreservation ↔ q.IsUniform :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 350,
+   "informal_written_by_model": "If $s$ is bounded with respect to $r$, and $r$ is less than or equal to $r'$, then $s$ is bounded with respect to $r'$.",
+   "lean": "theorem Bounded.rel_mono {r' : α → α → Prop} (h : Bounded r s) (hrr' : r ≤ r') : Bounded r' s :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 360,
+   "informal_written_by_model": "If $x$ is equal to $y$ modulo $U$, then $f$ of $x$ is equal to $f$ of $y$ modulo $U$ map $f$.",
+   "lean": "theorem map (hxy : x ≡ y [SMOD U]) (f : M →ₗ[R] N) : f x ≡ f y [SMOD U.map f] :=",
+   "bad_share_so_far": 0.002
+  },
+  {
+   "step": 370,
+   "informal_written_by_model": "The elements of the range of $n$ are pairwise less than.",
+   "lean": "theorem pairwise_lt_range (n : ℕ) : Pairwise (· < ·) (range n) :=",
+   "bad_share_so_far": 0.002
+  }
+ ],
+ "otf_bad_informal_share": 0.0015
+}
