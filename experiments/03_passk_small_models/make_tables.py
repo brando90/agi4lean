@@ -1,5 +1,6 @@
 """Markdown tables for the README from results/*.csv and results/*.json.  Example: python make_tables.py > results/headline_tables.md"""
-import csv, json, collections
+import csv, json, collections, sys
+PART = sys.argv[1] if len(sys.argv) > 1 else "main"  # "main" or "appendix"
 ORDER = ["gpt2_gpt4more", "gpt2_mma", "gpt2_base", "gemma_gpt4more_1ep", "gemma_gpt4more_5ep", "gemma_mma", "gemma_base"]
 SHORT = {"proofnet_lean4": "ProofNet", "minif2f_lean4": "MiniF2F"}
 CE_SET = {"proofnet_lean3": "ProofNet Lean 3 (CE)", "proofnet_lean4": "ProofNet Lean 4 (CE)", "minif2f_lean4": "MiniF2F (CE)"}
@@ -16,41 +17,45 @@ def cell(m, ds, k, metric="pass"):
         return "n/a"
     return f"{100*float(r['mean']):.1f} ± {100*float(r['sd_over_seeds']):.1f} [{100*float(r['ci95_lo']):.1f}, {100*float(r['ci95_hi']):.1f}]"
 
-for ds in ("proofnet_lean4", "minif2f_lean4"):
-    print(f"\n### Lean-checked pass@k on {SHORT[ds]} test (percent; mean ± sd over 3 seeds [95% bootstrap interval over tasks])\n")
-    print("| model | prompt format | pass@1 | pass@4 | pass@16 | pass@32 | greedy compiles | theorem-shaped samples |")
-    print("|---|---|---|---|---|---|---|---|")
+if PART == "main":
+    for ds in ("proofnet_lean4", "minif2f_lean4"):
+        print(f"\n### Lean-checked pass@k on {SHORT[ds]} test (percent; mean ± sd over 3 seeds [95% bootstrap interval over tasks])\n")
+        print("| model | prompt format | pass@1 | pass@4 | pass@16 | pass@32 | greedy compiles | theorem-shaped samples |")
+        print("|---|---|---|---|---|---|---|---|")
+        for m in ORDER:
+            if (m, ds, "pass", "1") not in pk:
+                continue
+            g = float(pk[(m, ds, "greedy_pass", "g")]["mean"]) * 100
+            s = float(pk[(m, ds, "theorem_shaped_rate", "g")]["mean"]) * 100
+            print(f"| {m} | {fmt[m]} | " + " | ".join(cell(m, ds, k) for k in (1, 4, 16, 32)) + f" | {g:.1f} | {s:.1f} |")
+
+    print("\n### CE, TFCE and TFA, single released checkpoint (no training seeds), test split\n")
+    print("| model | ProofNet Lean 3 CE (paper style) | TFCE | TFA | ProofNet Lean 4 CE | TFCE | TFA | MiniF2F CE | TFCE | TFA |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
+    ce = {}
+    for r in csv.DictReader(open("results/ce_tfa_table.csv")):
+        if r["split"] == "test" and r["format"] == "nl_eos":
+            ce[(r["model"], r["dataset"])] = r
     for m in ORDER:
-        if (m, ds, "pass", "1") not in pk:
-            continue
-        g = float(pk[(m, ds, "greedy_pass", "g")]["mean"]) * 100
-        s = float(pk[(m, ds, "theorem_shaped_rate", "g")]["mean"]) * 100
-        print(f"| {m} | {fmt[m]} | " + " | ".join(cell(m, ds, k) for k in (1, 4, 16, 32)) + f" | {g:.1f} | {s:.1f} |")
+        row = [m]
+        for ds in ("proofnet_lean3", "proofnet_lean4", "minif2f_lean4"):
+            r = ce[(m, ds)]
+            row += [f"{float(r['ce_full_paper_style']):.2f}", f"{float(r['tfce']):.2f}", f"{100*float(r['tfa']):.1f}%"]
+        print("| " + " | ".join(row) + " |")
 
-print("\n### CE, TFCE and TFA, single released checkpoint (no training seeds), test split\n")
-print("| model | ProofNet Lean 3 CE (paper style) | TFCE | TFA | ProofNet Lean 4 CE | TFCE | TFA | MiniF2F CE | TFCE | TFA |")
-print("|---|---|---|---|---|---|---|---|---|---|")
-ce = {}
-for r in csv.DictReader(open("results/ce_tfa_table.csv")):
-    if r["split"] == "test" and r["format"] == "nl_eos":
-        ce[(r["model"], r["dataset"])] = r
-for m in ORDER:
-    row = [m]
-    for ds in ("proofnet_lean3", "proofnet_lean4", "minif2f_lean4"):
-        r = ce[(m, ds)]
-        row += [f"{float(r['ce_full_paper_style']):.2f}", f"{float(r['tfce']):.2f}", f"{100*float(r['tfa']):.1f}%"]
-    print("| " + " | ".join(row) + " |")
+    print("\n### Trust controls (same wrap, rename and Lean check as the samples)\n")
+    print("| set | control | tasks | compile | rate |")
+    print("|---|---|---|---|---|")
+    for c in json.load(open("results/trust_controls.json")):
+        print(f"| {SHORT[c['dataset']]} | {c['control']} | {c['n']} | {c['compiles']} | {100*c['rate']:.1f}% |")
 
-print("\n### Trust controls (same wrap, rename and Lean check as the samples)\n")
-print("| set | control | tasks | compile | rate |")
-print("|---|---|---|---|---|")
-for c in json.load(open("results/trust_controls.json")):
-    print(f"| {SHORT[c['dataset']]} | {c['control']} | {c['n']} | {c['compiles']} | {100*c['rate']:.1f}% |")
 
-print("\n### gpt4-more vs mma gap (paired over tasks; difference = gpt4-more minus mma; p from a sign-flip test, 5000 flips)\n")
+print("\n### " + ("gpt4-more vs mma gap, Lean-checked pass@k" if PART == "main" else "gpt4-more vs mma gap, CE, TFCE and TFA") + " (paired over tasks; difference = gpt4-more minus mma; p from a sign-flip test, 5000 flips)\n")
 print("| set | pair | metric | difference [95% bootstrap interval] | p |")
 print("|---|---|---|---|---|")
 for g in json.load(open("results/gap_significance.json")):
+    if (g["kind"] == "pass") != (PART == "main"):
+        continue
     if g["kind"] == "pass":
         ds = g["dataset"]; name = f"Lean-checked pass@{g['k']} (prompt {g['fmt']})"
     else:
