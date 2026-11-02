@@ -1,1 +1,1 @@
-Wide tables (all k, bootstrap intervals, all three CE columns per task set) are in the appendix and in results/.
+Note on "base (training prompt, no shots)": 0.0% does not mean the base model cannot do the task. The base model never saw the training format (informal statement followed by the end-of-text token), so it does not write a Lean theorem after it. With 3 shots it does (row above). Wide tables (all k, bootstrap intervals, all three CE columns per task set) are in the appendix and in results/.

@@ -26,7 +26,7 @@ Labels: no DT, Lean-checked compile, LoRA r=64, skampere1 A100-80GB, 1 sampling 
 | + MMA (training prompt) | 23.6% | 80.0% | 65.3% | 1.80 |
 | + on-the-fly backtranslation (training prompt) | 37.7% | 83.9% | 66.5% | 1.76 |
 
-Wide tables (all k, bootstrap intervals, all three CE columns per task set) are in the appendix and in results/.
+Note on "base (training prompt, no shots)": 0.0% does not mean the base model cannot do the task. The base model never saw the training format (informal statement followed by the end-of-text token), so it does not write a Lean theorem after it. With 3 shots it does (row above). Wide tables (all k, bootstrap intervals, all three CE columns per task set) are in the appendix and in results/.
 
 
 ## Findings
