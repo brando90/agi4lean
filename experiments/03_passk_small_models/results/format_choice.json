@@ -1,0 +1,297 @@
+{
+ "choice": {
+  "gemma_base": "fs3_mma",
+  "gemma_gpt4more_1ep": "informal_formal",
+  "gemma_gpt4more_5ep": "informal_formal",
+  "gemma_gpt4more_feb14": "fs3_mma",
+  "gemma_mma": "informal_formal",
+  "gpt2_base": "fs3_mma",
+  "gpt2_gpt4more": "fs3_mma",
+  "gpt2_gpt4more_ds": "fs3_mma",
+  "gpt2_mma": "fs3_mma"
+ },
+ "table": {
+  "gemma_base": {
+   "fs3_mma": {
+    "shaped": 0.9965659340659341,
+    "compile": 0.017857142857142856,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.003434065934065934,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.005494505494505495,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gemma_gpt4more_1ep": {
+   "fs3_mma": {
+    "shaped": 0.9471153846153846,
+    "compile": 0.042582417582417584,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.9340659340659341,
+    "compile": 0.061813186813186816,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.7712912087912088,
+    "compile": 0.022664835164835164,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.6462912087912088,
+    "compile": 0.019917582417582416,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.6923076923076923,
+    "compile": 0.032280219780219783,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gemma_gpt4more_5ep": {
+   "fs3_mma": {
+    "shaped": 0.8173076923076923,
+    "compile": 0.04189560439560439,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.9745879120879121,
+    "compile": 0.09958791208791208,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.8331043956043956,
+    "compile": 0.019230769230769232,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.823489010989011,
+    "compile": 0.026785714285714284,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.8021978021978022,
+    "compile": 0.03914835164835165,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gemma_gpt4more_feb14": {
+   "fs3_mma": {
+    "shaped": 0.9931318681318682,
+    "compile": 0.023351648351648352,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.025412087912087912,
+    "compile": 0.0006868131868131869,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.05013736263736264,
+    "compile": 0.0013736263736263737,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gemma_mma": {
+   "fs3_mma": {
+    "shaped": 1.0,
+    "compile": 0.03914835164835165,
+    "exact": 0.0013736263736263737,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.7335164835164835,
+    "compile": 0.06799450549450549,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 1.0,
+    "compile": 0.0521978021978022,
+    "exact": 0.0006868131868131869,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 1.0,
+    "compile": 0.04945054945054945,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.04120879120879121,
+    "compile": 0.005494505494505495,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gpt2_base": {
+   "fs3_mma": {
+    "shaped": 0.3585164835164835,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.0006868131868131869,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gpt2_gpt4more": {
+   "fs3_mma": {
+    "shaped": 0.28296703296703296,
+    "compile": 0.0027472527472527475,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.0013736263736263737,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gpt2_gpt4more_ds": {
+   "fs3_mma": {
+    "shaped": 0.2850274725274725,
+    "compile": 0.003434065934065934,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.0013736263736263737,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.0,
+    "compile": 0.0,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  },
+  "gpt2_mma": {
+   "fs3_mma": {
+    "shaped": 0.967032967032967,
+    "compile": 0.0673076923076923,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "informal_formal": {
+    "shaped": 0.36675824175824173,
+    "compile": 0.027472527472527472,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_eos": {
+    "shaped": 0.9436813186813187,
+    "compile": 0.052884615384615384,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "mma_nl": {
+    "shaped": 0.9093406593406593,
+    "compile": 0.06524725274725275,
+    "exact": 0.0,
+    "n_tasks": 182
+   },
+   "nl_eos": {
+    "shaped": 0.9423076923076923,
+    "compile": 0.044642857142857144,
+    "exact": 0.0,
+    "n_tasks": 182
+   }
+  }
+ }
+}

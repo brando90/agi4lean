@@ -1,0 +1,1034 @@
+[
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "fs3_mma",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "k": 1,
+  "diff": -0.05640938069216756,
+  "ci": [
+   -0.06261384335154825,
+   -0.05071721311475408
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "fs3_mma",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "k": 16,
+  "diff": -0.5393814061103103,
+  "ci": [
+   -0.5748216084291912,
+   -0.5026296383557052
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "k": 1,
+  "diff": 0.0027891621129326003,
+  "ci": [
+   -0.006945867486338797,
+   0.01223958333333332
+  ],
+  "p": 0.6012
+ },
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "k": 16,
+  "diff": 0.04529278929487605,
+  "ci": [
+   -0.00670329389137424,
+   0.09614891111938584
+  ],
+  "p": 0.0912
+ },
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "k": 1,
+  "diff": 0.04735883424408011,
+  "ci": [
+   0.03221624544626591,
+   0.06261384335154824
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "proofnet_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "k": 16,
+  "diff": 0.1700352264247296,
+  "ci": [
+   0.11660945165384247,
+   0.2262280908678388
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "fs3_mma",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "k": 1,
+  "diff": -0.11759259259259254,
+  "ci": [
+   -0.12578703703703698,
+   -0.10930439814814809
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "fs3_mma",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "k": 16,
+  "diff": -0.8058909258820881,
+  "ci": [
+   -0.8279641694045345,
+   -0.7823252619419607
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "k": 1,
+  "diff": -0.06643518518518515,
+  "ci": [
+   -0.07926273148148145,
+   -0.053008101851851834
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "k": 16,
+  "diff": -0.08962324961410088,
+  "ci": [
+   -0.11188881575378949,
+   -0.0681493013304359
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "k": 1,
+  "diff": -0.03949074074074073,
+  "ci": [
+   -0.05583449074074072,
+   -0.024258101851851854
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "pass",
+  "dataset": "minif2f_lean4",
+  "fmt": "informal_formal",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "k": 16,
+  "diff": -0.06703018575034964,
+  "ci": [
+   -0.08963664628755366,
+   -0.04267749893549244
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.29696181318799003,
+  "ci": [
+   0.25179973890791174,
+   0.3441504902160558
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.13118858185031865,
+  "ci": [
+   -0.1394036889007529,
+   -0.12294792583151186
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.13364788519020832,
+  "ci": [
+   -0.17228572485184504,
+   -0.09583090322222497
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.29587579555198795,
+  "ci": [
+   0.25237908682129423,
+   0.34346620990116083
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.11313365418158594,
+  "ci": [
+   -0.12140234858713678,
+   -0.10518686278631575
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.4134162194550943,
+  "ci": [
+   -0.46070741665065607,
+   -0.3644224771086099
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.4280551191299192,
+  "ci": [
+   0.3688416192448267,
+   0.4860030124264379
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.1527902673809759,
+  "ci": [
+   -0.16242894435561792,
+   -0.14274761122801613
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.11562561625620973,
+  "ci": [
+   0.07263322224193866,
+   0.15906636887916883
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.5598779064352795,
+  "ci": [
+   0.508661382060538,
+   0.6115095772089497
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.14303829352701863,
+  "ci": [
+   -0.15351832311960958,
+   -0.132450137934297
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.12582725835808214,
+  "ci": [
+   -0.17979262072176821,
+   -0.0741213490667721
+  ],
+  "p": 0.0002
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.4179255678847029,
+  "ci": [
+   0.3589300080570015,
+   0.4753731652208277
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.1432620714645128,
+  "ci": [
+   -0.15336120346913465,
+   -0.133828194183675
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.1221665663097822,
+  "ci": [
+   0.08536345736721906,
+   0.16000338378018444
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.5520259766965299,
+  "ci": [
+   0.5020651160220841,
+   0.598424780594336
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.13686279630338824,
+  "ci": [
+   -0.14666026577152108,
+   -0.12725090136801875
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.11433006026955418,
+  "ci": [
+   -0.16250031324801634,
+   -0.06417049333059159
+  ],
+  "p": 0.0002
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.6579232463419763,
+  "ci": [
+   0.5934158461992858,
+   0.7198950951216649
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.19088587612727953,
+  "ci": [
+   -0.2012991904418488,
+   -0.18061837018594715
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.2494861296885603,
+  "ci": [
+   0.2036910250116996,
+   0.2979871001705909
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.753183060005063,
+  "ci": [
+   0.6943935242832685,
+   0.8125880829786343
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": -0.17843574049368582,
+  "ci": [
+   -0.18913325846724496,
+   -0.16717596339275603
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gpt2_gpt4more__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gpt2_gpt4more",
+  "b": "gpt2_mma",
+  "diff": 0.008307148349989213,
+  "ci": [
+   -0.0540352258041818,
+   0.06789297389304519
+  ],
+  "p": 0.7974
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.40759453128595824,
+  "ci": [
+   0.37987152566431,
+   0.4360928907807245
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.006817961325410937,
+  "ci": [
+   -0.012192428661663025,
+   -0.001651329742591893
+  ],
+  "p": 0.011
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.3946823888116956,
+  "ci": [
+   0.37440141110747593,
+   0.4145318915089433
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.3979916554249701,
+  "ci": [
+   0.3695606838514815,
+   0.42886747852517443
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.014319083974009654,
+  "ci": [
+   -0.01970432074893205,
+   -0.009165442560906296
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.247907217981611,
+  "ci": [
+   0.23002195496659392,
+   0.26642443970550567
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.5217891492510355,
+  "ci": [
+   0.47556943168403004,
+   0.5686588333258705
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.024628204684103688,
+  "ci": [
+   -0.03264634232287125,
+   -0.016045634664835474
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.5653861964759105,
+  "ci": [
+   0.5365360536533808,
+   0.5958466830755627
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.6000403306817496,
+  "ci": [
+   0.5544487440137453,
+   0.6466712271814705
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.040277599487253415,
+  "ci": [
+   -0.04883055652501763,
+   -0.03151131481412918
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.41855349783547263,
+  "ci": [
+   0.3881767927693763,
+   0.4500162209968785
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.5552079664694296,
+  "ci": [
+   0.506384743355416,
+   0.6051545266041884
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.029090432218603187,
+  "ci": [
+   -0.037826716440754964,
+   -0.02014466568022162
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.5845370133439913,
+  "ci": [
+   0.5540189825341989,
+   0.615148256498962
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.6344218653601569,
+  "ci": [
+   0.5858028287984229,
+   0.6842593381533751
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.04489778393023723,
+  "ci": [
+   -0.052079851619295174,
+   -0.03729983931457674
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.4477194314747191,
+  "ci": [
+   0.4155645993251768,
+   0.48253810180143575
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.7161523751873787,
+  "ci": [
+   0.662297937558974,
+   0.7692233299215635
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.0442039746730054,
+  "ci": [
+   -0.053182498864381686,
+   -0.035571254767436805
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.6712986356223756,
+  "ci": [
+   0.6355597177931016,
+   0.7054704193834174
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.795726022759422,
+  "ci": [
+   0.7435123184665304,
+   0.8475834781029185
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": -0.05842119154057216,
+  "ci": [
+   -0.06718246166294065,
+   -0.04994136813030543
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_1ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_1ep",
+  "b": "gemma_mma",
+  "diff": 0.5404711073152918,
+  "ci": [
+   0.5050191670093348,
+   0.5772767398475384
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.076103286664994,
+  "ci": [
+   1.0226678202997466,
+   1.1322509635911613
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.017115303238884348,
+  "ci": [
+   -0.022029362228073057,
+   -0.01218131855130196
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 0.9254904724643183,
+  "ci": [
+   0.8879837980775359,
+   0.9654218144987603
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 0.9298728568876375,
+  "ci": [
+   0.8758742396887697,
+   0.982739550085952
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.022827956520143102,
+  "ci": [
+   -0.027986614790851953,
+   -0.017553135169456245
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__minif2f_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 0.6177121060534834,
+  "ci": [
+   0.5832349127132151,
+   0.6511645615694952
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.2622135803904584,
+  "ci": [
+   1.1836659198807133,
+   1.3360549480363888
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.024998817312461074,
+  "ci": [
+   -0.03439085516197386,
+   -0.015543693093763244
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.2178604151971348,
+  "ci": [
+   1.1684646245887487,
+   1.271288352026468
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.239577841374182,
+  "ci": [
+   1.1680263573123564,
+   1.308156695449224
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.04104373796332267,
+  "ci": [
+   -0.04949455596306311,
+   -0.0321961064051877
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 0.9146854071033289,
+  "ci": [
+   0.865729016550976,
+   0.9674582726469647
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.261541146845431,
+  "ci": [
+   1.1824508696472324,
+   1.3407413654714015
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.026751269520940008,
+  "ci": [
+   -0.03553407267944233,
+   -0.018411753632732345
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.2245676863050114,
+  "ci": [
+   1.1744812608799857,
+   1.2737626516771594
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.2461573671650241,
+  "ci": [
+   1.1696711888828792,
+   1.321889478097091
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.04166090858949197,
+  "ci": [
+   -0.0492303465709493,
+   -0.03396411842591054
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean3_validation__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 0.9313903020027408,
+  "ci": [
+   0.878161117642483,
+   0.9846376616093622
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.4995112181361256,
+  "ci": [
+   1.41689263520345,
+   1.582395116960416
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.04731816843233473,
+  "ci": [
+   -0.05608725231853339,
+   -0.03775760533257587
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__mma_nl.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.3480364601439272,
+  "ci": [
+   1.2935502203771845,
+   1.4029096387668452
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfce",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.4651720279552898,
+  "ci": [
+   1.3869112413844775,
+   1.5449054398334743
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "tfa",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": -0.0638974000358842,
+  "ci": [
+   -0.0719594632626557,
+   -0.05502692976854538
+  ],
+  "p": 0.0
+ },
+ {
+  "kind": "ce_full",
+  "file": "gemma_gpt4more_5ep__proofnet_lean4_test__nl_eos.per_task.json",
+  "a": "gemma_gpt4more_5ep",
+  "b": "gemma_mma",
+  "diff": 1.0551909094314675,
+  "ci": [
+   0.9956959539246217,
+   1.1129589724892293
+  ],
+  "p": 0.0
+ }
+]

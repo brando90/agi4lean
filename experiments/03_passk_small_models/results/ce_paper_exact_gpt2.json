@@ -1,0 +1,30 @@
+[
+ {
+  "model": "gpt2",
+  "split": "test",
+  "eval_loss": 3.814439976468999,
+  "embedding_rows_in_checkpoint": 50257,
+  "rows_after_resize": 50258
+ },
+ {
+  "model": "AI4M/gpt2-gpt4-more",
+  "split": "test",
+  "eval_loss": 3.3047203662547657,
+  "embedding_rows_in_checkpoint": 50257,
+  "rows_after_resize": 50258
+ },
+ {
+  "model": "AI4M/gpt2-mma-dataset",
+  "split": "test",
+  "eval_loss": 3.4100717280773405,
+  "embedding_rows_in_checkpoint": 50257,
+  "rows_after_resize": 50258
+ },
+ {
+  "model": "AI4M/gpt2-gpt4-more-dataset",
+  "split": "test",
+  "eval_loss": 3.3047204829276877,
+  "embedding_rows_in_checkpoint": 50257,
+  "rows_after_resize": 50258
+ }
+]

@@ -1,0 +1,14 @@
+[
+ {
+  "input": "Statement in natural language:\nFor a given number 'n', 'n' is less than 'xn' of 'a1' and 'n'.\nTranslate the statement in natural language to Lean:",
+  "output": "theorem n_lt_xn (n) : n < xn a1 n :="
+ },
+ {
+  "input": "Statement in natural language:\nFor any two elements I and J from the set WithBot (Box ι), the equality of their real-valued function sets implies the equality of I and J themselves.\nTranslate the statement in natural language to Lean:",
+  "output": "theorem withBotCoe_inj {I J : WithBot (Box ι)} : (I : Set (ι → ℝ)) = J ↔ I = J :="
+ },
+ {
+  "input": "Statement in natural language:\nThe left composition of functions 'f' and 'g' is equal to the composition of the left of 'f' and the left of 'g'.\nTranslate the statement in natural language to Lean:",
+  "output": "theorem comp_left : (f ≫ g).left = f.left ≫ g.left :="
+ }
+]

@@ -1,0 +1,44 @@
+[
+ {
+  "dataset": "proofnet_lean4",
+  "control": "gold (known good)",
+  "n": 183,
+  "compiles": 177,
+  "rate": 0.9672131147540983
+ },
+ {
+  "dataset": "proofnet_lean4",
+  "control": "gold with one ')' deleted (known bad)",
+  "n": 183,
+  "compiles": 0,
+  "rate": 0.0
+ },
+ {
+  "dataset": "proofnet_lean4",
+  "control": "gold of another task (compiles, wrong)",
+  "n": 183,
+  "compiles": 173,
+  "rate": 0.9453551912568307
+ },
+ {
+  "dataset": "minif2f_lean4",
+  "control": "gold (known good)",
+  "n": 225,
+  "compiles": 223,
+  "rate": 0.9911111111111112
+ },
+ {
+  "dataset": "minif2f_lean4",
+  "control": "gold with one ')' deleted (known bad)",
+  "n": 225,
+  "compiles": 0,
+  "rate": 0.0
+ },
+ {
+  "dataset": "minif2f_lean4",
+  "control": "gold of another task (compiles, wrong)",
+  "n": 225,
+  "compiles": 223,
+  "rate": 0.9911111111111112
+ }
+]
