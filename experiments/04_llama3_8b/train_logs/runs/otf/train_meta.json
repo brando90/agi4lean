@@ -1,0 +1,116 @@
+{
+ "data": "otf",
+ "rows": 2000,
+ "epochs": 3,
+ "steps": 375,
+ "batch": 16,
+ "lr": 0.0001,
+ "tokens_seen": 426527,
+ "train_seconds": 2174,
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "base": "meta-llama/Meta-Llama-3-8B",
+ "lora": {
+  "r": 64,
+  "alpha": 128,
+  "dropout": 0.05,
+  "targets": "all linear"
+ },
+ "seed": 0,
+ "otf_examples": [
+  {
+   "step": 0,
+   "informal_written_by_model": "by { cases h, refl, refl } (b) {a₁ a₂} (h : a₁ < a₂) : pair a₁ b < pair a₂ b := by { cases h, refl, refl } (c) {a₁ a₂} (h : a₁ < a₂) : pair a b₁ < pair a₂ b := by { cases h, refl, refl } (d) {a₁ a₂} (h : a₁ < a₂) : pair a₁ b₂ < pair a₂ b := by { cases h, refl, refl } (e) {",
+   "lean": "theorem pair_lt_pair_right (a) {b₁ b₂} (h : b₁ < b₂) : pair a b₁ < pair a b₂ :="
+  },
+  {
+   "step": 20,
+   "informal_written_by_model": "by theorem cokernelIsoOfEq_hom_comp_desc {Z} {f g : X ⟶ Y} [HasCokernel f] [HasCokernel g] (h : f = g)\n    (e : Y ⟶ Z) (he) :\n    (cokernelIsoOfEq h).hom ≫ cokernel.desc _ e he = cokernel.desc _ e (by simp [h, he]) := by theorem cokernelIsoOfEq_hom_comp_desc {Z} {f g : X ⟶ Y} [HasCokernel f] [HasCokernel",
+   "lean": "theorem cokernelIsoOfEq_hom_comp_desc {Z} {f g : X ⟶ Y} [HasCokernel f] [HasCokernel g] (h : f = g)\n    (e : Y ⟶ Z) (he) :\n    (cokernelIsoOfEq h).hom ≫ cokernel.desc _ e he = cokernel.desc _ e (by simp [h, he]) :="
+  },
+  {
+   "step": 40,
+   "informal_written_by_model": "by theorem coeff_add_mul_monomial (a : R) :\n    coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a := by theorem coeff_add_mul_monomial (a : R) :\n    coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a := by theorem coeff_add_mul_monomial (a : R) :\n    coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a := by theorem coeff_add_mul_monomial (a :",
+   "lean": "theorem coeff_add_mul_monomial (a : R) :\n    coeff R (m + n) (φ * monomial R n a) = coeff R m φ * a :="
+  },
+  {
+   "step": 60,
+   "informal_written_by_model": "by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem aleph0_pos : 0 < ℵ₀ := by theorem",
+   "lean": "theorem aleph0_pos : 0 < ℵ₀ :="
+  },
+  {
+   "step": 80,
+   "informal_written_by_model": "by",
+   "lean": "theorem le_one_iff {a : Ordinal} : a ≤ 1 ↔ a = 0 ∨ a = 1 :="
+  },
+  {
+   "step": 100,
+   "informal_written_by_model": "by",
+   "lean": "theorem monic_of_c_eq_one (ha : P.a = 0) (hb : P.b = 0) (hc : P.c = 1) : P.toPoly.Monic :="
+  },
+  {
+   "step": 120,
+   "informal_written_by_model": "by",
+   "lean": "theorem comp_orderIso [Preorder α] [Preorder β] [Preorder γ] {f : α → β} {g : β → α}\n    (h : IsOrderRightAdjoint f g) (e : γ ≃o α) : IsOrderRightAdjoint (f ∘ e) (e.symm ∘ g) :="
+  },
+  {
+   "step": 140,
+   "informal_written_by_model": "by simp [HasSum, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero, zero,",
+   "lean": "theorem hasSum_zero_iff : HasSum f 0 ↔ ∀ x, f x = 0 :="
+  },
+  {
+   "step": 160,
+   "informal_written_by_model": "by simp [Eventually.exists_mem]",
+   "lean": "theorem Eventually.exists_mem {p : α → Prop} {f : Filter α} (hp : ∀ᶠ x in f, p x) :\n    ∃ v ∈ f, ∀ y ∈ v, p y :="
+  },
+  {
+   "step": 180,
+   "informal_written_by_model": "by simp [hf, his]",
+   "lean": "theorem exists_sub_one_mem_and_mem (s : Finset ι) {f : ι → Ideal R}\n    (hf : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → f i ⊔ f j = ⊤) (i : ι) (his : i ∈ s) :\n    ∃ r : R, r - 1 ∈ f i ∧ ∀ j ∈ s, j ≠ i → r ∈ f j :="
+  },
+  {
+   "step": 200,
+   "informal_written_by_model": "by",
+   "lean": "theorem erase_right_comm {a b : α} {s : Finset α} : erase (erase s a) b = erase (erase s b) a :="
+  },
+  {
+   "step": 220,
+   "informal_written_by_model": "by",
+   "lean": "theorem IsOrtho.mono_right {U V₁ V₂ : Submodule 𝕜 E} (hV : V₂ ≤ V₁) (h : U ⟂ V₁) : U ⟂ V₂ :="
+  },
+  {
+   "step": 240,
+   "informal_written_by_model": "by",
+   "lean": "theorem coe_lpBcfₗᵢ (f : lp (fun _ : α => E) ∞) : (lpBcfₗᵢ E 𝕜 f : α → E) = f :="
+  },
+  {
+   "step": 260,
+   "informal_written_by_model": "by",
+   "lean": "theorem nhds_top' : 𝓝 ∞ = ⨅ r : ℝ≥0, 𝓟 (Ioi ↑r) :="
+  },
+  {
+   "step": 280,
+   "informal_written_by_model": "by",
+   "lean": "theorem pairwise_disjoint_on_Ico_pred [PredOrder α] [Preorder β] {f : α → β} (hf : Antitone f) :\n    Pairwise (Disjoint on fun n => Ico (f n) (f (pred n))) :="
+  },
+  {
+   "step": 300,
+   "informal_written_by_model": "by",
+   "lean": "theorem ncard_le_one_iff_subset_singleton [Nonempty α]\n  (hs : s.Finite := by toFinite_tac) :\n    s.ncard ≤ 1 ↔ ∃ x : α, s ⊆ {x} :="
+  },
+  {
+   "step": 320,
+   "informal_written_by_model": "by",
+   "lean": "theorem le_mul_of_pos_right (h : 0 < n) : m ≤ m * n :="
+  },
+  {
+   "step": 340,
+   "informal_written_by_model": "by",
+   "lean": "theorem liftpPreservation_iff_uniform : q.LiftPPreservation ↔ q.IsUniform :="
+  },
+  {
+   "step": 360,
+   "informal_written_by_model": "by",
+   "lean": "theorem map (hxy : x ≡ y [SMOD U]) (f : M →ₗ[R] N) : f x ≡ f y [SMOD U.map f] :="
+  }
+ ]
+}

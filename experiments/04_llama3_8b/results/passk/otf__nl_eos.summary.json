@@ -1,0 +1,37 @@
+{
+ "model": "otf",
+ "adapter": "runs/otf/adapter",
+ "format": "nl_eos",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.06989071038251368,
+   "pass@5": 0.2348944748798982,
+   "pass@10": 0.3481276731110474,
+   "pass@50": 0.6323858548800069,
+   "pass@100": 0.7213114754098361,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 1.0,
+   "seconds_generate": 200,
+   "seconds_lean_check": 666,
+   "gold_statements_compile": "174/176 convertible gold statements (7 of 183 gold entries are commented out or defs, cannot be turned into a theorem statement)",
+   "tasks_rechecked_one_candidate_per_file": 1
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.3025,
+   "pass@5": 0.7072644451759789,
+   "pass@10": 0.8379967703708515,
+   "pass@50": 0.9795197249293862,
+   "pass@100": 0.9959016393442623,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 1.0,
+   "seconds_generate": 251,
+   "seconds_lean_check": 813,
+   "gold_statements_compile": "223/225 convertible gold statements (19 of 244 gold entries are commented out or defs, cannot be turned into a theorem statement)",
+   "tasks_rechecked_one_candidate_per_file": 3
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

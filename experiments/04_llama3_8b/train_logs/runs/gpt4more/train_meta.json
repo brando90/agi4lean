@@ -1,0 +1,20 @@
+{
+ "data": "gpt4more",
+ "rows": 348,
+ "epochs": 3,
+ "steps": 66,
+ "batch": 16,
+ "lr": 0.0001,
+ "tokens_seen": 173559,
+ "train_seconds": 333,
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "base": "meta-llama/Meta-Llama-3-8B",
+ "lora": {
+  "r": 64,
+  "alpha": 128,
+  "dropout": 0.05,
+  "targets": "all linear"
+ },
+ "seed": 0,
+ "otf_examples": []
+}

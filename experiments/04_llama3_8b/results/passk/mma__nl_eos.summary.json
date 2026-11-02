@@ -1,0 +1,37 @@
+{
+ "model": "mma",
+ "adapter": "runs/mma/adapter",
+ "format": "nl_eos",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.0733879781420765,
+   "pass@5": 0.15925497332188707,
+   "pass@10": 0.20299852096694793,
+   "pass@50": 0.32371561652827946,
+   "pass@100": 0.3825136612021858,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9999453551912569,
+   "seconds_generate": 191,
+   "seconds_lean_check": 167,
+   "gold_statements_compile": "174/176 convertible gold statements (7 of 183 gold entries are commented out or defs, cannot be turned into a theorem statement)",
+   "tasks_rechecked_one_candidate_per_file": 0
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.3219262295081967,
+   "pass@5": 0.6133958688757664,
+   "pass@10": 0.7321594300926173,
+   "pass@50": 0.9054470933457508,
+   "pass@100": 0.9426229508196722,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9999590163934426,
+   "seconds_generate": 280,
+   "seconds_lean_check": 1082,
+   "gold_statements_compile": "223/225 convertible gold statements (19 of 244 gold entries are commented out or defs, cannot be turned into a theorem statement)",
+   "tasks_rechecked_one_candidate_per_file": 0
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

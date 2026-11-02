@@ -1,0 +1,35 @@
+{
+ "model": "gpt4more",
+ "adapter": "runs/gpt4more/adapter",
+ "format": "nl_eos",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.05710382513661202,
+   "pass@5": 0.14892180869117783,
+   "pass@10": 0.19982169810275144,
+   "pass@50": 0.35644303192922416,
+   "pass@100": 0.4207650273224044,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9905464480874316,
+   "seconds_generate": 438,
+   "seconds_lean_check": 120,
+   "gold_statements_compile": "174/176 convertible gold statements (7 of 183 gold entries are commented out or defs, cannot be turned into a theorem statement)"
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.2343032786885246,
+   "pass@5": 0.5229515308800706,
+   "pass@10": 0.640231211175497,
+   "pass@50": 0.8417462121917102,
+   "pass@100": 0.8975409836065574,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9966803278688525,
+   "seconds_generate": 623,
+   "seconds_lean_check": 338,
+   "gold_statements_compile": "223/225 convertible gold statements (19 of 244 gold entries are commented out or defs, cannot be turned into a theorem statement)"
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

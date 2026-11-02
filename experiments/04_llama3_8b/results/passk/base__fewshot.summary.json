@@ -1,0 +1,22 @@
+{
+ "model": "base",
+ "adapter": null,
+ "format": "fewshot",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.09508196721311475,
+   "pass@5": 0.25867506269676765,
+   "pass@10": 0.349771808972203,
+   "pass@50": 0.5684357128120978,
+   "pass@100": 0.6502732240437158,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9501639344262295,
+   "seconds_generate": 437,
+   "seconds_lean_check": 623,
+   "tasks_rechecked_one_candidate_per_file": 1
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

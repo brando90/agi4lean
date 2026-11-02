@@ -1,0 +1,20 @@
+{
+ "data": "mma",
+ "rows": 84679,
+ "epochs": 1,
+ "steps": 5293,
+ "batch": 16,
+ "lr": 0.0001,
+ "tokens_seen": 8600160,
+ "train_seconds": 7008,
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "base": "meta-llama/Meta-Llama-3-8B",
+ "lora": {
+  "r": 64,
+  "alpha": 128,
+  "dropout": 0.05,
+  "targets": "all linear"
+ },
+ "seed": 0,
+ "otf_examples": []
+}

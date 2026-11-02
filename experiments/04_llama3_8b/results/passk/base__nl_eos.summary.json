@@ -1,0 +1,35 @@
+{
+ "model": "base",
+ "adapter": null,
+ "format": "nl_eos",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.0,
+   "pass@5": 0.0,
+   "pass@10": 0.0,
+   "pass@50": 0.0,
+   "pass@100": 0.0,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.0,
+   "seconds_generate": 1184,
+   "seconds_lean_check": 94,
+   "gold_statements_compile": "174/176 convertible gold statements (7 of 183 gold entries are commented out or defs, cannot be turned into a theorem statement)"
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.0,
+   "pass@5": 0.0,
+   "pass@10": 0.0,
+   "pass@50": 0.0,
+   "pass@100": 0.0,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.0,
+   "seconds_generate": 1415,
+   "seconds_lean_check": 199,
+   "gold_statements_compile": "223/225 convertible gold statements (19 of 244 gold entries are commented out or defs, cannot be turned into a theorem statement)"
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

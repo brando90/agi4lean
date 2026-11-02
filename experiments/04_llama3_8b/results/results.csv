@@ -1,0 +1,13 @@
+model,task_set,ce_paper_style,ce_token_mean,fewshot_pass@1,fewshot_pass@10,fewshot_pass@100,fewshot_pass@5,fewshot_pass@50,fewshot_single_theorem_frac,nl_eos_pass@1,nl_eos_pass@10,nl_eos_pass@100,nl_eos_pass@5,nl_eos_pass@50,nl_eos_single_theorem_frac,tfa,tfce
+base,proofnet_lean3:test,1.974,1.897,,,,,,,,,,,,,0.5729,2.592
+base,proofnet_lean4:test,2.074,2.003,0.0951,0.3498,0.6503,0.2587,0.5684,0.95,0.0,0.0,0.0,0.0,0.0,0.0,0.544,2.745
+base,minif2f_lean4:test,1.899,1.847,,,,,,,0.0,0.0,0.0,0.0,0.0,0.0,0.6161,2.492
+gpt4more,proofnet_lean3:test,1.608,1.573,,,,,,,,,,,,,0.6642,1.705
+gpt4more,proofnet_lean4:test,1.65,1.618,,,,,,,0.0571,0.1998,0.4208,0.1489,0.3564,0.991,0.6602,1.769
+gpt4more,minif2f_lean4:test,1.662,1.628,,,,,,,0.2343,0.6402,0.8975,0.523,0.8417,0.997,0.6911,1.697
+mma,proofnet_lean3:test,1.797,1.753,,,,,,,,,,,,,0.6534,1.657
+mma,proofnet_lean4:test,1.75,1.711,,,,,,,0.0734,0.203,0.3825,0.1593,0.3237,1.0,0.665,1.585
+mma,minif2f_lean4:test,1.716,1.682,,,,,,,0.3219,0.7322,0.9426,0.6134,0.9054,1.0,0.6847,1.45
+otf,proofnet_lean3:test,1.527,1.487,,,,,,,,,,,,,0.6716,1.673
+otf,proofnet_lean4:test,1.557,1.517,,,,,,,0.0699,0.3481,0.7213,0.2349,0.6324,1.0,0.6658,1.723
+otf,minif2f_lean4:test,1.535,1.5,,,,,,,0.3025,0.838,0.9959,0.7073,0.9795,1.0,0.7106,1.525

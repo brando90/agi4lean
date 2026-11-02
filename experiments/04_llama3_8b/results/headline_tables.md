@@ -1,0 +1,27 @@
+### Lean-checked pass@k, ProofNet-v3 Lean 4 test, 183 tasks (percent, [95% bootstrap interval over tasks]; n = 100 samples per task, 1 sampling seed)
+
+| model | prompt | pass@1 | pass@4 | pass@16 | pass@32 | pass@100 | theorem-shaped samples |
+|---|---|---|---|---|---|---|---|
+| base (3-shot prompt) | fewshot | 9.5 [7.3, 11.9] | 23.1 [18.9, 27.7] | 41.4 [35.7, 47.5] | 50.9 [44.6, 56.9] | 65.0 [57.9, 72.1] | 95.0% |
+| base (training prompt, no shots) | nl_eos | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0% |
+| + gpt4-more | nl_eos | 5.7 [3.7, 7.7] | 13.4 [9.7, 17.3] | 24.0 [19.1, 29.3] | 30.9 [25.1, 36.7] | 42.1 [35.0, 49.2] | 99.1% |
+| + MMA | nl_eos | 7.3 [4.7, 10.1] | 14.6 [10.5, 19.0] | 23.6 [18.5, 28.8] | 28.8 [23.1, 34.4] | 38.3 [31.1, 45.4] | 100.0% |
+| + on-the-fly backtranslation | nl_eos | 7.0 [5.5, 8.6] | 20.3 [17.1, 24.0] | 43.4 [37.8, 48.9] | 55.9 [49.9, 61.7] | 72.1 [65.6, 78.1] | 100.0% |
+
+### Lean-checked pass@k, MiniF2F Lean 4 test, 244 tasks (same)
+
+| model | prompt | pass@1 | pass@4 | pass@16 | pass@32 | pass@100 | theorem-shaped samples |
+|---|---|---|---|---|---|---|---|
+| base (training prompt, no shots) | nl_eos | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.0% |
+| + gpt4-more | nl_eos | 23.4 [20.3, 26.4] | 48.2 [43.6, 52.8] | 70.9 [66.2, 75.3] | 79.5 [75.3, 83.5] | 89.8 [85.7, 93.4] | 99.7% |
+| + MMA | nl_eos | 32.2 [28.4, 35.9] | 57.3 [52.8, 61.7] | 80.0 [76.1, 83.7] | 87.3 [83.6, 90.7] | 94.3 [91.0, 97.1] | 100.0% |
+| + on-the-fly backtranslation | nl_eos | 30.2 [27.7, 32.9] | 65.4 [61.8, 69.1] | 89.7 [87.1, 92.1] | 95.6 [93.9, 97.0] | 99.6 [98.8, 100.0] | 100.0% |
+
+### CE (paper style), TFCE and TFA, test splits (single run each)
+
+| model | ProofNet Lean 3 CE | TFCE | TFA | ProofNet Lean 4 CE | TFCE | TFA | MiniF2F CE | TFCE | TFA |
+|---|---|---|---|---|---|---|---|---|---|
+| base | 1.97 | 2.59 | 57.3% | 2.07 | 2.75 | 54.4% | 1.90 | 2.49 | 61.6% |
+| + gpt4-more | 1.61 | 1.70 | 66.4% | 1.65 | 1.77 | 66.0% | 1.66 | 1.70 | 69.1% |
+| + MMA | 1.80 | 1.66 | 65.3% | 1.75 | 1.58 | 66.5% | 1.72 | 1.45 | 68.5% |
+| + on-the-fly backtranslation | 1.53 | 1.67 | 67.2% | 1.56 | 1.72 | 66.6% | 1.54 | 1.53 | 71.1% |
