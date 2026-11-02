@@ -12,7 +12,7 @@ BASE = "meta-llama/Meta-Llama-3-8B"
 def fmt_nl_eos(nl, eos):
     return nl + eos
 
-# 3-shot prompt of the lean4ai pass@k protocol (used only for the base-model few-shot reference row).
+# 3-shot prompt from lean4ai (reference prompt for the base model and, like for like, for the fine-tuned models).
 FEWSHOT = (
     "Your task is translate the natural language version of the mathematical statement "
     "to a formal Lean statement version, using the following format:\n"

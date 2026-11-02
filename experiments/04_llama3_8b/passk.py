@@ -6,8 +6,8 @@ Lean 4.15 + Mathlib (same header the task ships with). A sample passes when Lean
 fine). This measures that the statement is well-formed Lean (compiles), NOT that it means the same as the gold
 statement. pass@k = unbiased estimator of Chen et al. 2021 from n samples. `--gold-check` compiles the gold statements.
 --format nl_eos : prompt "<informal><|end_of_text|>" (the training format; zero-shot for the base model)
---format fewshot: the 3-shot prompt of the lean4ai protocol (base-model reference; its examples are miniF2F AMC problems,
-                  so use it on ProofNet only)
+--format fewshot: the 3-shot prompt from lean4ai (base-model reference; its three examples are AMC problems; text search found none of them
+                  among the 244 MiniF2F test tasks)
 Example:
   python passk.py --name gpt4more --adapter runs/gpt4more/adapter --tasks proofnet_lean4:test minif2f_lean4:test \\
      --n 32 --out results/passk --lean-bin $L --mathlib $M

@@ -1,0 +1,1 @@
+Gain = fine-tuned minus base, same metric, same task set. Llama-3-8B base pass@16 is the 3-shot prompt row. GPT-2 base was not sampled in 03. Gemma and GPT-2 rows are full fine-tunes (see 03), Llama-3-8B is LoRA, so size and fine-tune method change together.

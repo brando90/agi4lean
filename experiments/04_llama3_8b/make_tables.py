@@ -11,11 +11,14 @@ import numpy as np
 d = sys.argv[1] if len(sys.argv) > 1 else "results"
 rng = np.random.default_rng(0)
 KS = [1, 4, 16, 32, 100]
-runs = [("base (3-shot prompt)", "base", "fewshot", ["proofnet_lean4"]),
+runs = [("base (3-shot prompt)", "base", "fewshot", ["proofnet_lean4", "minif2f_lean4"]),
         ("base (training prompt, no shots)", "base", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
-        ("+ gpt4-more", "gpt4more", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
-        ("+ MMA", "mma", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
-        ("+ on-the-fly backtranslation", "otf2", "nl_eos", ["proofnet_lean4", "minif2f_lean4"])]
+        ("+ gpt4-more (training prompt)", "gpt4more", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
+        ("+ MMA (training prompt)", "mma", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
+        ("+ on-the-fly backtranslation (training prompt)", "otf2", "nl_eos", ["proofnet_lean4", "minif2f_lean4"]),
+        ("+ gpt4-more (3-shot prompt)", "gpt4more", "fewshot", ["proofnet_lean4", "minif2f_lean4"]),
+        ("+ MMA (3-shot prompt)", "mma", "fewshot", ["proofnet_lean4", "minif2f_lean4"]),
+        ("+ on-the-fly backtranslation (3-shot prompt)", "otf2", "fewshot", ["proofnet_lean4", "minif2f_lean4"])]
 
 
 def pk(n, c, k):
@@ -31,7 +34,10 @@ def boot(v):
 rows, md = [], {}
 for label, name, fm, sets in runs:
     for s in sets:
-        pt = json.load(open(f"{d}/passk/{name}__{fm}__{s}_test.per_task.json"))
+        fn = [p for p in (f"{d}/passk/{name}__{fm}__{s}_test.per_task.json", f"{d}/passk_fs/{name}__{fm}__{s}_test.per_task.json") if os.path.exists(p)]
+        if not fn:
+            continue  # run not available (yet)
+        pt = json.load(open(fn[0]))
         r = dict(model=label, prompt=fm, task_set=s, tasks=len(pt))
         for k in KS:
             m, lo, hi = boot([pk(t["n"], t["c"], k) for t in pt])
