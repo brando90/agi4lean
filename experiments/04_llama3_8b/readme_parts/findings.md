@@ -1,3 +1,9 @@
 
 ## Findings
-PENDING: rewritten after the 3-shot runs.
+Like for like (same 3-shot prompt for base and fine-tune; paired bootstrap over tasks, pass@16, points):
+- ProofNet: on-the-fly backtranslation +6.4 [0.9, 12.0] over base (41.4% -> 47.8%); gpt4-more -2.4 [-7.8, 3.1] and MMA -3.6 [-9.5, 2.7], both within noise.
+- MiniF2F: base is already at 98.2% pass@16 (100% pass@100), so there is no headroom; all three fine-tunes are slightly lower: gpt4-more -4.7 [-6.8, -2.9], MMA -3.9 [-6.0, -1.9], on-the-fly backtranslation -2.7 [-4.5, -0.8].
+- TFA on ProofNet Lean 3 rises for all three fine-tunes, 57.3% -> 65.3 to 66.5% (+8.0 to +9.2 points). CE drops 1.97 -> 1.61 to 1.80. These are single runs without an interval.
+- Training prompt (zero-shot) rows are lower than the 3-shot rows for the same model, so a fine-tune scored with its training prompt understates it against the 3-shot base: gpt4-more 24.0% vs 38.9%, MMA 23.6% vs 37.8%, on-the-fly backtranslation 37.7% vs 47.8% (ProofNet pass@16).
+- Size vs gain: the 8B gains on TFA (+8 to +9 points) are smaller than Gemma-2-2B (+16 to +20) and GPT-2 (+8.5 to +22.8); the pass@16 gains on both sets are +6.4 at best (ProofNet, on-the-fly backtranslation) and negative otherwise, versus +31 to +48 (ProofNet) and +17 to +26 (MiniF2F) for Gemma-2-2B. The Gemma and 8B base pass@16 differ in how strong the base already is (Gemma 15.6% / 67.7%, Llama-3-8B 41.4% / 98.2%), so the gain shrinks partly because the 8B base is already strong.
+- Caveats: 1 sampling seed, LoRA instead of full fine-tuning, MMA 1 epoch instead of 3, on-the-fly backtranslation trained on 2,000 MMA formal statements instead of the paper's LeanDojo corpus. Pass@k is a Lean compile check of the statement, not equality with the gold statement. Theorem-shaped share of samples differs by row (e.g. 66.8% for on-the-fly backtranslation 3-shot on ProofNet vs 95.0% for base); pass@k counts only theorem-shaped samples that compile.

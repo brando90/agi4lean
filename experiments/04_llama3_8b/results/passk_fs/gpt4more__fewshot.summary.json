@@ -1,0 +1,35 @@
+{
+ "model": "gpt4more",
+ "adapter": "runs/gpt4more/adapter",
+ "format": "fewshot",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.1110928961748634,
+   "pass@5": 0.25466110916824963,
+   "pass@10": 0.33299142602927784,
+   "pass@50": 0.52386251644685,
+   "pass@100": 0.6010928961748634,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.971912568306011,
+   "seconds_generate": 453,
+   "seconds_lean_check": 795,
+   "tasks_rechecked_one_candidate_per_file": 5
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.6052868852459017,
+   "pass@5": 0.8470075010058925,
+   "pass@10": 0.9072002391168166,
+   "pass@50": 0.9649400015087569,
+   "pass@100": 0.9713114754098361,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9996311475409836,
+   "seconds_generate": 595,
+   "seconds_lean_check": 151,
+   "tasks_rechecked_one_candidate_per_file": 0
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}

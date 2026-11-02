@@ -1,0 +1,35 @@
+{
+ "model": "mma",
+ "adapter": "runs/mma/adapter",
+ "format": "fewshot",
+ "seed": 0,
+ "results": {
+  "proofnet_lean4:test": {
+   "pass@1": 0.09579234972677596,
+   "pass@5": 0.24718505737497626,
+   "pass@10": 0.3248233701899857,
+   "pass@50": 0.5049814616096036,
+   "pass@100": 0.5792349726775956,
+   "tasks": 183,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.8373224043715847,
+   "seconds_generate": 312,
+   "seconds_lean_check": 131,
+   "tasks_rechecked_one_candidate_per_file": 0
+  },
+  "minif2f_lean4:test": {
+   "pass@1": 0.5995081967213115,
+   "pass@5": 0.8694673041863868,
+   "pass@10": 0.9196982515630678,
+   "pass@50": 0.9764011931307376,
+   "pass@100": 0.9836065573770492,
+   "tasks": 244,
+   "n_samples": 100,
+   "frac_samples_single_theorem": 0.9284016393442625,
+   "seconds_generate": 545,
+   "seconds_lean_check": 145,
+   "tasks_rechecked_one_candidate_per_file": 0
+  }
+ },
+ "criterion": "Lean 4.15 + Mathlib reports no error on the sampled theorem statement (sorry allowed); not semantic equality with gold"
+}
