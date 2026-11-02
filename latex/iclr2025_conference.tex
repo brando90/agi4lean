@@ -55,7 +55,7 @@
 % The word \textsc{Abstract} must be centered, in small caps, and in point size 12. Two
 % line spaces precede the abstract. The abstract must be limited to one paragraph.
 
-\textit{Autoformalization}, the translation of informal mathematics into formal Lean, is limited by the scarcity of paired formal-informal data. Backtranslation, in which a model informalizes formal text to create synthetic pairs, is established in machine translation and was applied to autoformalization by ProofNet (distilled backtranslation with GPT-4). We do not claim backtranslation as new. We compare four ways of generating paired data at a small scale: (1) on-the-fly (online) backtranslation, where one model informalizes and then re-formalizes a batch inside the training loop; (2) distilled backtranslation with a six-shot GPT-4 prompt over full Mathlib4 proofs; (3) informalization of each tactic together with the proof state before and after it, a step-level form of supervision related to process reward models; and (4) regular-expression templates. Fine-tuning GPT-2 (124M parameters) on the six-shot GPT-4 data (71,550 tokens) gives a lower evaluation loss on the ProofNet test set than fine-tuning on the MMA dataset (10.9M tokens), and the other methods improve on the pretrained baseline. These results come from one small model, one benchmark and one metric (evaluation loss), and we state what is outside their scope: other formal languages, human-in-the-loop data creation, and larger models (see Limitations). We also report the cost of each generation method, examples of the generated data, and a check of every training set for overlap with ProofNet and MiniF2F.
+\textit{Autoformalization}, the translation of informal mathematics into formal Lean, is limited by the scarcity of paired formal-informal data. Backtranslation, in which a model informalizes formal text to create synthetic pairs, is established in machine translation and was applied to autoformalization by ProofNet (distilled backtranslation with GPT-4). We do not claim backtranslation as new. We compare four ways of generating paired data at a small scale: (1) on-the-fly (online) backtranslation, where one model informalizes and then re-formalizes a batch inside the training loop; (2) distilled backtranslation with a six-shot GPT-4 prompt over full Mathlib4 proofs; (3) informalization of each tactic together with the proof state before and after it, a step-level form of supervision related to process reward models; and (4) regular-expression templates. In the original submission, fine-tuning GPT-2 (124M parameters) on the six-shot GPT-4 data (71,550 tokens) gave a lower evaluation loss on the ProofNet test set than fine-tuning on the MMA dataset (10.9M tokens). In this revision we re-evaluate the released checkpoints and add MiniF2F, Lean-checked pass@$k$ (a sampled statement counts when Lean 4 with Mathlib compiles it), Gemma-2-2B and Llama-3-8B. The evaluation-loss ordering holds (3.30 vs 3.41) but the gap is smaller than first reported (3.12 vs 3.88), and the advantage of the six-shot data over MMA does not carry over to pass@$k$: for Gemma-2-2B it is higher on ProofNet pass@1 (+4.7 points) and lower on MiniF2F ($-4.0$ points), and for GPT-2 it is far lower on both. For Llama-3-8B, only on-the-fly backtranslation beats the 3-shot base model on ProofNet pass@16 (+6.4 points, 95\% interval [0.9, 12.0]). A compile check is also not a faithfulness check: the same pipeline accepts 94.5\% of gold statements taken from a different ProofNet task. We state what is still outside the scope of these results: other formal languages, human-in-the-loop data creation, and training seeds for the released checkpoints (see Limitations). We also report the cost of each generation method, examples of the generated data, and a check of every training set for overlap with ProofNet and MiniF2F.
 \end{abstract}
 
 \section{Introduction}
@@ -108,7 +108,9 @@ Our \textbf{key contributions} are:
 \begin{enumerate}
     \item A comparison of four generation methods for formal-informal pairs (on-the-fly backtranslation, distilled six-shot full-proof backtranslation, tactic-level informalization with proof states, and regular-expression templates) under one fine-tuning recipe, with their token counts and estimated API cost (Table~\ref{table:cost}) and examples of each (Figure~\ref{fig:examples}).
 
-    \item Evidence, for GPT-2 (124M) and the ProofNet test set, that a small set of high-quality pairs (348 pairs, 71,550 tokens) reaches a lower evaluation loss than the MMA dataset (84,679 pairs, 10.9M tokens) \citep{mma}, and that tactic-level pairs with proof states improve on the pretrained baseline with 1,754 tokens.
+    \item Evidence, for GPT-2 (124M) and the ProofNet test set, that a small set of high-quality pairs (348 pairs, 71,550 tokens) reaches a lower evaluation loss than the MMA dataset (84,679 pairs, 10.9M tokens) \citep{mma}, re-evaluated in this revision with a smaller gap, and that tactic-level pairs with proof states improve on the pretrained baseline with 1,754 tokens.
+
+    \item New in this revision: Lean-checked pass@$k$ on ProofNet and MiniF2F for GPT-2, Gemma-2-2B and Llama-3-8B (Section~\ref{sec:new}), which shows that the evaluation-loss advantage of the six-shot data over MMA does not appear consistently in pass@$k$, together with trust controls showing what a Lean compile does and does not measure.
 
     \item The AI4Math datasets and models, released on Hugging Face, with an overlap check of each training set against ProofNet and MiniF2F (Appendix~\ref{app:contamination}).
 \end{enumerate}
@@ -324,26 +326,24 @@ At the end of this explanation, I will give you 2 things. The first is a list of
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|c|}
+\begin{tabular}{|l|c|c|}
 \hline
-\textbf{Fine-Tuning Dataset} & \textbf{Eval Loss} \\
+\textbf{Fine-Tuning Dataset} & \textbf{Eval Loss, as first reported} & \textbf{Eval Loss, re-evaluated} \\
 \hline
-GPT-2 Baseline & 75.1839 \\
+GPT-2 Baseline & 75.1839 & 3.81 \\
 \hline
-GPT-4 LeanDojo (Individual Tactics) & 5.1287 \\
+GPT-4 LeanDojo (Individual Tactics) & 5.1287 & not re-evaluated \\
 \hline
-Regex-Parsed LeanDojo Proofs & 4.4709 \\
+Regex-Parsed LeanDojo Proofs & 4.4709 & not re-evaluated \\
 \hline
-On-the-Fly Backtranslation & 4.032 \\
+On-the-Fly Backtranslation & 4.032 & not re-evaluated \\
 \hline
-MMA Train & 3.8791 \\
+MMA Train & 3.8791 & 3.41 \\
 \hline
-GPT-4 MathLib4 (Full Proof)& 3.1209 \\
+GPT-4 MathLib4 (Full Proof)& 3.1209 & 3.30 \\
 \hline
-% MiniF2F (Individual Tactics) & 1.9915 \\
-% \hline
 \end{tabular}
-\caption{\textbf{Evaluation loss on ProofNet's Test Dataset}. The model used was GPT-2, and it was fine-tuned on each dataset for 3 epochs before being evaluated. GPT-4 MathLib4 (Full Proof) demonstrated higher token efficiency than MMA train, and despite the lower token count, GPT-4 LeanDojo (Individual Tactics) improved the baseline substantially.}
+\caption{\textbf{Evaluation loss on ProofNet's Test Dataset} (Lean 3 statements, whole-sequence cross-entropy). The model used was GPT-2, fine-tuned on each dataset for 3 epochs. The first column is the table of the original submission. The second column re-runs the paper's evaluation code on the released checkpoints (one checkpoint each, so there is no seed interval). The ordering of the three re-evaluated rows holds, the gap between the two datasets is 0.11 instead of 0.76, and the baseline of 75.18 does not reproduce (3.81; we did not find the cause). The four rows marked not re-evaluated keep their original values.}
 \label{table:model_loss}
 \end{table}
 
@@ -353,9 +353,9 @@ We included the results of fine-tuning on the training set of MMA, a dataset tha
 
 
 
-We have three major observations:
+We have three observations from the original GPT-2 evaluation-loss experiment; Section~\ref{sec:new} tests them with pass@$k$ and larger models.
 \begin{itemize}
-    \item \textbf{Few-Shot Beats MMA}: Our \textit{GPT-4 MathLib4 (Full Proof)} dataset, developed through a hard-coded 6-shot prompting technique, outperformed the larger, diverse dataset from Albert et al., despite being over 150 times smaller. This substantial increase in token efficiency is likely due to better informalizations of our methodology, which improves upon the comparatively simple prompting technique of MMA. We demonstrate that more examples, though less cost-effective, can result in better autoformalization performance with fewer tokens.
+    \item \textbf{Few-Shot Beats MMA on GPT-2 evaluation loss, by a smaller margin than first reported}: Our \textit{GPT-4 MathLib4 (Full Proof)} dataset, developed through a hard-coded 6-shot prompting technique, reached a lower evaluation loss than the larger, diverse dataset from Albert et al., despite being over 150 times smaller (3.30 vs 3.41 on re-evaluation). The advantage sits in the natural-language tokens: on the formal tokens alone MMA is better (Section~\ref{sec:new}). We do not show that the informalizations are better, only that the loss is lower in this one setting.
 
     \item \textbf{Individual Tactics are Efficient}: The \textit{GPT-4 LeanDojo (Individual Tactics)} dataset, which leverages an intensive approach of matching individual tactics to lines in the informalized proof, demonstrated dramatic improvement from GPT-2 baseline with far fewer tokens compared to other methods. However, this method first requires having GPT-4 informalize the proof as a whole, and then pairing the individual tactics to a line in the translated natural language proof: making the strategy more costly at \$0.15 per proof compared to \$0.05 per proof in \textit{GPT-4 MathLib4 (Full Proof)} and the \$0.01 per proof in MMA, which had 332,000 theorems informalized for \$3,500 total \citep{mma}. This was the largest barrier preventing us from generating a larger training corpus. Given the drastic improvement compared to the baseline, we hypothesize that this is method has significant potential and should be explored in the future with more resources. 
 
@@ -363,19 +363,76 @@ We have three major observations:
 \end{itemize}
 
 \begin{tcolorbox}[colframe=blue, colback=white, boxrule=0.5mm, width=\linewidth, title={}]
-    \textbf{Takeaway \#1: Prioritize Quality over Quantity!} \\
-    Utilizing few-shot prompting techniques appears to generate more accurate and higher-quality parallel informalizations, as evidenced by the results of our \textit{GPT-4 MathLib4 (Full Proof)} and \textit{GPT-4 Lean (Individual Tactics)} datasets. Investing in more sophisticated full-proof few-shot or line-by-line matched examples can significantly enhance token efficiency, yielding better results even with fewer tokens.
+    \textbf{Takeaway \#1: Few high-quality pairs can match a much larger set on evaluation loss, but the evidence is mixed on pass@$k$.} \\
+    On GPT-2, \textit{GPT-4 MathLib4 (Full Proof)} reaches a lower evaluation loss than MMA with about 150 times fewer tokens. In Lean-checked pass@$k$ the comparison has no single sign: higher for Gemma-2-2B (5 epochs) on ProofNet, lower on MiniF2F, and far lower for GPT-2 (Section~\ref{sec:new}).
     \vspace{0.5em}
 
     \textbf{Takeaway \#2: Intermediate Steps Matter} \\
     \textit{GPT-4 Lean (Individual Tactics)} demonstrates remarkable proof-efficiency for the small token count despite the higher costs and poor performance compared to utilizing the full proof. 
     \vspace{0.001em}
 
-    \textbf{Takeaway \#3: High-Quality Data Beats Diversity.} \\
-    Datasets that utilize comparatively richer prompts with GPT-4 exhibit more efficient parallel corpora for autoformalization training compared to datasets that rely on blindly training on diverse data (On-The-Fly Backtranslation, MMA, Regex-Parsed LeanDojo Proofs).
+    \textbf{Takeaway \#3: Data quality and diversity trade off by benchmark.} \\
+    Richer GPT-4 prompts give a lower GPT-2 evaluation loss than MMA, but MMA has the higher pass@$k$ on MiniF2F for both Gemma-2-2B gpt4-more checkpoints, so the benchmark decides which dataset looks better. On Llama-3-8B, on-the-fly backtranslation, which uses no teacher, is the only fine-tune that beats the 3-shot base model on ProofNet pass@16.
     \vspace{0.5em}
 \end{tcolorbox}
 
+
+\section{Additional Experiments: Lean-Checked pass@$k$, MiniF2F and Larger Models}
+\label{sec:new}
+Reviewers asked for a second benchmark, a metric closer to use than evaluation loss, and models larger than GPT-2. This section reports those. All numbers here are from Lean-checked compilation or from cross-entropy on the released checkpoints; no language model judged any output. Sampling, training and cross-entropy ran on free university GPUs, and the Lean check ran on CPU.
+
+\paragraph{Setup.} pass@$k$ is the share of tasks for which at least one of $k$ sampled Lean formalizations compiles (Lean 4.15 with Mathlib); it is computed from $n$ samples per task with the unbiased estimator. Compiling means the statement type-checks with \texttt{sorry} allowed as proof; it does not mean the statement is equal to the gold statement. We use the ProofNet test set (183 Lean 4 tasks) and MiniF2F test (244 Lean 4 tasks; the GPT-2 and Gemma experiment uses the 225 whose gold statement is not commented out, the Llama experiment uses all 244). For GPT-2 and Gemma-2-2B we use the released checkpoints (\texttt{AI4M} organization), $n=32$ samples, 3 sampling seeds (mean $\pm$ sd over seeds). The prompt format was chosen per model on ProofNet validation among 5 formats, so each model is compared at its own best prompt. For Llama-3-8B we fine-tune with LoRA (rank 64; not a full fine-tune) on gpt4-more, MMA (1 epoch, the original recipe uses 3) and on-the-fly backtranslation (2,000 MMA formal statements, because the LeanDojo corpus is not on Hugging Face), with $n=100$ samples and 1 sampling seed. TFA and TFCE are the teacher-forced token accuracy and cross-entropy on the formal tokens only.
+
+\begin{table}[ht]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|l|r|r|r|r|r|r|}
+\hline
+\textbf{Model, fine-tuning data} & \multicolumn{2}{c|}{\textbf{ProofNet pass@$k$}} & \multicolumn{2}{c|}{\textbf{MiniF2F pass@$k$}} & \textbf{CE} & \textbf{TFA} \\
+ & $k$=1 & $k$=32 & $k$=1 & $k$=32 & & \\
+\hline
+GPT-2, gpt4-more & 0.2 & 6.0 & 0.1 & 2.5 & 3.30 & 33.7 \\
+GPT-2, MMA & 5.8 & 78.7 & 11.8 & 95.3 & 3.41 & 48.0 \\
+\hline
+Gemma-2-2B, none (3-shot) & 1.4 & 24.4 & 12.9 & 81.2 & 2.50 & 40.2 \\
+Gemma-2-2B, gpt4-more 1 epoch & 6.0 & 67.0 & 12.9 & 96.4 & 2.23 & 56.1 \\
+Gemma-2-2B, gpt4-more 5 epochs & 10.5 & 77.4 & 15.6 & 96.3 & 2.71 & 56.0 \\
+Gemma-2-2B, MMA & 5.7 & 63.7 & 19.5 & 99.0 & 1.81 & 60.2 \\
+\hline
+\end{tabular}
+\caption{\textbf{Lean-checked pass@$k$ (percent), GPT-2 and Gemma-2-2B.} Mean over 3 sampling seeds, 32 samples per task; sd over seeds is at most 0.6 at $k$=1 and 3.8 at $k$=32. CE and TFA (percent) are on ProofNet Lean 3 test (186 tasks), one released checkpoint each. Per-model intervals and pass@4 and pass@16 are in \texttt{experiments/03\_passk\_small\_models}. GPT-2 gpt4-more produces a theorem-shaped sample only 29\% of the time and ignored all 5 prompt formats tried, so its low pass@$k$ shows that the checkpoint does not follow a usable prompt.}
+\label{table:passk_small}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+\textbf{Llama-3-8B, 3-shot prompt} & \textbf{ProofNet pass@16} & \textbf{MiniF2F pass@16} & \textbf{TFA} & \textbf{CE} \\
+\hline
+base (no fine-tuning) & 41.4 & 98.2 & 57.3 & 1.97 \\
++ gpt4-more & 38.9 & 93.4 & 66.4 & 1.61 \\
++ MMA & 37.8 & 94.2 & 65.3 & 1.80 \\
++ on-the-fly backtranslation & 47.8 & 95.5 & 66.5 & 1.76 \\
+\hline
+\end{tabular}
+\caption{\textbf{Llama-3-8B, Lean-checked pass@16 (percent), base against fine-tuned with the same 3 worked examples in the prompt.} ProofNet: 183 Lean 4 tasks; MiniF2F: 244. One sampling seed, 100 samples per task, LoRA rank 64. Rows prompted with the format each model was trained on are in \texttt{experiments/04\_llama3\_8b}; the base model scores 0.0 on that format because it never saw it. TFA and CE on ProofNet Lean 3 test.}
+\label{table:passk_llama}
+\end{table}
+
+\paragraph{Trust controls: a compile is not a faithfulness check.} We ran the same wrap, rename and Lean check on gold statements. Gold compiles in 96.7\% of ProofNet tasks and 99.1\% of MiniF2F tasks; gold with one closing parenthesis deleted compiles in 0\% (the check rejects broken statements); and the gold statement of a different task compiles in 94.5\% of ProofNet tasks and 99.1\% of MiniF2F tasks (so the check accepts a wrong statement as long as it type-checks). Exact match with the gold statement is at most 0.3\% at pass@1. The pass@$k$ numbers therefore measure the rate of well-formed statements, not correct formalization, and we do not report them as accuracy.
+
+\paragraph{Findings.}
+\begin{itemize}
+    \item \textbf{The GPT-2 evaluation-loss result does not reproduce in size.} Re-evaluating the released GPT-2 checkpoints gives CE 3.30 (gpt4-more), 3.41 (MMA) and 3.81 (base). The paper's slides gave 2.33 vs 2.69 and its table 3.12 vs 3.88 with a baseline of 75.18. The ordering holds; the gap is 0.11 here. On the formal tokens alone MMA is better (TFCE 3.03 vs 3.59, TFA 48.0\% vs 33.7\%, $p<0.001$), so the small CE advantage of gpt4-more sits in the natural-language tokens.
+    \item \textbf{The gpt4-more vs MMA gap in pass@$k$ has no single sign} (paired over tasks, difference = gpt4-more minus MMA, sign-flip test). Gemma-2-2B with 5 epochs: ProofNet pass@1 $+4.7$ points [3.2, 6.3], MiniF2F pass@1 $-4.0$ [$-5.6$, $-2.4$]. Gemma-2-2B with 1 epoch: ProofNet $+0.3$ ($p=0.60$), MiniF2F $-6.6$ ($p<0.001$). GPT-2: $-5.6$ on ProofNet and $-11.8$ on MiniF2F, with the prompt-following caveat in Table~\ref{table:passk_small}.
+    \item \textbf{Fine-tuning helps small models and gives little to Llama-3-8B on pass@$k$.} TFA gains are +8.5 to +22.8 points for GPT-2, +16 to +20 for Gemma-2-2B and +8 to +9 for Llama-3-8B. ProofNet pass@16 gains over the 3-shot base are +31 to +48 points for Gemma-2-2B but at most +6.4 for Llama-3-8B, whose base is already strong (41.4\% on ProofNet and 98.2\% on MiniF2F, against 15.6\% and 67.7\% for Gemma). For Llama-3-8B, on-the-fly backtranslation is the only fine-tune above the base on ProofNet pass@16: $+6.4$ points [0.9, 12.0]; gpt4-more ($-2.4$) and MMA ($-3.6$) are within noise, and on MiniF2F every fine-tune is 2.7 to 4.7 points below the base.
+    \item \textbf{Which tasks.} For Gemma-2-2B 5 epochs, ProofNet pass@1 is highest on Artin, Dummit-Foote and Herstein (17.6, 14.3 and 19.4\%, against 6.9, 5.5 and 5.8\% for MMA); MMA leads on Pugh and on every MiniF2F family except algebra. Rudin, Munkres and Axler are the hardest for all models (pass@1 at most 6.6\%).
+\end{itemize}
+These results use one released checkpoint per setting (no training seeds), so differences between datasets are measured against sampling and task variation only, not training variation.
 
 \section{Related Work}
 The closest prior work is ProofNet \citep{azerbayev2023proofnet}, which introduced distilled backtranslation for autoformalization (GPT-4 informalizes Mathlib statements, a smaller model is fine-tuned on the pairs), and MMA \citep{mma}, which applied zero-shot GPT-4 informalization at scale across several formal languages. Our six-shot full-proof data is a variant of ProofNet's recipe, and MMA is our main baseline. Backtranslation itself comes from machine translation \citep{sennrich-etal-2016-improving,poncelas2018investigating}. Process reward models \citep{lightman2023lets,uesato2022solving} supervise each reasoning step rather than the final answer; our tactic-level data uses the same idea for informalization, with Lean proof states as the context, and we do not train a reward model.
@@ -388,12 +445,14 @@ Moreover, the prevalent use of first-order logic in these models constrains thei
 
 \section{Discussion}
 
-Our paper releases datasets that can be used for enhancing the autoformalization capabilities of large language models. We provide evidence, for GPT-2 and evaluation loss on ProofNet, that models can reach lower loss by training on \textbf{AI4Math}, and our generation strategies can significantly reduce the number of tokens required compared to MMA. \label{discussion}
+Our paper releases datasets that can be used for enhancing the autoformalization capabilities of large language models. We provide evidence, for GPT-2 and evaluation loss on ProofNet, that models can reach lower loss by training on \textbf{AI4Math} with far fewer tokens than MMA, although the gap is smaller on re-evaluation than first reported. Lean-checked pass@$k$ on two benchmarks and three model sizes (Section~\ref{sec:new}) does not show a consistent advantage of the six-shot data over MMA, so the claim that high-quality data beats diverse data holds for GPT-2 evaluation loss and not more broadly. We read the results as showing that the answer depends on model size, benchmark and metric. \label{discussion}
 
 \section{Limitations}
 \begin{itemize}
-    \item \textbf{One small model, one benchmark, one metric.} The results above fine-tune GPT-2 (124M) and report evaluation loss on the ProofNet test set. Evaluation loss measures how well the model predicts the Lean text, not whether a generated statement compiles or is faithful. Larger and math-specialized models, MiniF2F, and Lean-checked pass@$k$ are the subject of the new experiments listed in the response to reviewers.
-    \item \textbf{Small differences.} The gap between the best two GPT-4 datasets is small, and per-example losses were not saved, so we cannot test whether it exceeds seed-to-seed noise. Only GPT-4 data beat MMA here; the on-the-fly, regex and individual-tactics sets do not.
+    \item \textbf{Scope of the models, benchmarks and metrics.} The original experiments fine-tune GPT-2 (124M) and report evaluation loss on ProofNet. The new experiments add MiniF2F, Gemma-2-2B (released checkpoints) and Llama-3-8B (LoRA, not a full fine-tune; one sampling seed; MMA trained for 1 epoch instead of 3). We did not run Llemma-7B or other math-specialized models, or Putnam.
+    \item \textbf{pass@$k$ is a compile rate.} A statement counts when Lean compiles it (with \texttt{sorry} allowed). The same check accepts 94.5\% of ProofNet gold statements from a different task, so pass@$k$ does not measure faithfulness. We did not run an equivalence check against gold or a human review.
+    \item \textbf{Small differences, no training seeds.} The released checkpoints are single training runs, so gaps between datasets carry sampling and task uncertainty but no training-seed uncertainty. The paper's original CE numbers do not reproduce (Table~\ref{table:model_loss}); we did not find the cause of the 75.18 baseline. Only GPT-4 data beat MMA on GPT-2 evaluation loss here; the on-the-fly, regex and individual-tactics sets do not, and these three were not re-evaluated.
+    \item \textbf{No comparison with other public datasets or other informalizers.} We did not fine-tune on Lean Workbook, FormL4 or FIMO at the same token budget, and we did not compare GPT-4 with another model (such as Gemini) as the informalizer. These are the remaining open requests in the response to reviewers.
     \item \textbf{Other formal languages.} We study Lean 4 only. Our methods rely on Lean structure (LeanDojo tactic states, regex templates over Lean tactics), and Metamath proofs have no tactic state, so these methods would need a different step segmentation there. We have not tried Metamath or other formal languages and do not claim the results transfer.
     \item \textbf{Human in the loop.} All pairs are generated automatically; the only human-written text is the six examples in the prompt. We did not study human review or correction of the informalizations, nor human-in-the-loop evaluation, and leave both out of scope.
     \item \textbf{Cost estimates.} Costs are list-price lower bounds, because no billing or wall-clock record exists (Table~\ref{table:cost}).
@@ -402,10 +461,10 @@ Our paper releases datasets that can be used for enhancing the autoformalization
 
 \section{Future Work}
 
-We concentrated on autoformalizing theorem statements, not on generating complete formal proofs. A next step is to test whether proofs or tactic scripts generated by fine-tuned models compile in Lean 4, which is the Lean-checked pass@$k$ evaluation that the response to reviewers reports for the new experiments. A second step is to scale the tactic-level data: informalizing each intermediate proof state yields step-level pairs that capture the incremental deduction of an interactive theorem prover, and we would test whether training on them transfers beyond the training proofs.
+We concentrated on autoformalizing theorem statements, not on generating complete formal proofs. A next step is to check faithfulness, not only compilation, of the generated statements (equivalence with gold or human review), since a compile check accepts wrong statements (Section~\ref{sec:new}). A second step is to scale the tactic-level data: informalizing each intermediate proof state yields step-level pairs that capture the incremental deduction of an interactive theorem prover, and we would test whether training on them transfers beyond the training proofs.
 
 \section{Conclusion}
-We compared four ways of generating formal-informal pairs for autoformalization with GPT-2 (124M) on the ProofNet test set. Six-shot GPT-4 informalization of full Mathlib4 proofs reached a lower evaluation loss than the MMA dataset with 71,550 tokens instead of 10.9M, and tactic-level pairs with proof states improved on the pretrained baseline with very little data. The claim is limited to one small model, one benchmark and one metric; we report costs, examples and an overlap check so that these results can be reproduced and extended.
+We compared four ways of generating formal-informal pairs for autoformalization. With GPT-2 (124M), six-shot GPT-4 informalization of full Mathlib4 proofs reaches a lower ProofNet evaluation loss than the MMA dataset with 71,550 tokens instead of 10.9M (3.30 vs 3.41 on re-evaluation), and tactic-level pairs with proof states improve on the pretrained baseline with very little data. Lean-checked pass@$k$ on ProofNet and MiniF2F, for GPT-2, Gemma-2-2B and Llama-3-8B, does not show a consistent advantage of the six-shot data over MMA, and on Llama-3-8B only on-the-fly backtranslation beats the 3-shot base model. A compile check also accepts wrong statements, so the pass@$k$ numbers measure well-formedness. We report costs, examples, an overlap check and trust controls so that these results can be reproduced and extended.
 
 \section{Acknowledgments}
 This project was the final assignment for Stanford's CS197: Computer Science Research, a course that teaches undergraduates and junior students fast iteration and research methodologies.
